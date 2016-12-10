@@ -25,7 +25,7 @@ public class Main {
 	public State state = State.GAME;
 	public boolean inMenu = false;
 	ClassLoader cl = getClass().getClassLoader();
-	Player player;
+	public Player player;
 	Texture bg;
 	public Level level;
 	HitboxController hbc;

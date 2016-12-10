@@ -3,6 +3,7 @@ package main;
 import java.awt.Color;
 import java.awt.Font;
 
+import controller.AnimationController;
 import controller.HitboxController;
 import controller.ProjectileController;
 import controller.WaveHandler;
@@ -11,6 +12,7 @@ import entities.Hurtbox;
 import entities.Player;
 import entities.Projectile;
 import graphics.Screen;
+import graphics.SpriteSheet;
 import graphics.Texture;
 
 public class Level {
@@ -20,13 +22,15 @@ public class Level {
 	public ProjectileController pc;
 	public WaveHandler wh;
 	Font defFont;
+	AnimationController animationController;
 	int wave = 0;
+	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/player.png", 240, 120),60, 60);
 
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
 		coin = new Texture("/res/sprites/coin.png", 40, 40);
 		frame = new Texture("/res/sprites/frame.png", 80, 80);
-		player = new Player(0, 150, 200, 60, 60, 1, new Texture("/res/sprites/player.png", 60, 60));
+		player = new Player(0, 150, 200, 60, 60, 1, playerSprites.getTexture(0, 0));
 
 		hbc = new HitboxController();
 		pc = new ProjectileController(hbc);
@@ -40,6 +44,7 @@ public class Level {
 		defFont = new Font("Garamond", 1, 50);
 		hbc.add(new Hurtbox(player), 0);
 		hbc.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
+		animationController = new AnimationController();
 	}
 
 	public void render(Screen screen) {
@@ -56,6 +61,7 @@ public class Level {
 		pc.update();
 		hbc.update();
 		wh.update();
+		animationController.update(playerSprites, player);
 		render(screen);
 	}
 
