@@ -36,7 +36,7 @@ public class Main {
 	}
 
 	private void loop() throws InterruptedException {
-		Window window = new Window("Game", 960, 540);
+		Window window = new Window("Game", 960, 640);
 		window.show();
 		Screen screen = window.getScreen();
 		window.addKeyListener(new InputHandler());
