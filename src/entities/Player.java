@@ -87,7 +87,7 @@ public class Player extends Entity {
 	}
 
 	private void handleInput() {
-		if(InputHandler.isKeyPressed(KeyEvent.VK_A)) {
+		if(InputHandler.isKeyTyped(KeyEvent.VK_A)) {
 			System.out.println("right");
 		}
 	}

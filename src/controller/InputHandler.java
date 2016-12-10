@@ -18,13 +18,10 @@ public class InputHandler extends KeyAdapter {
 
 	public void keyReleased(KeyEvent e) {
 		keys.remove(e.getKeyCode());
-
 	}
 
 	public static boolean isKeyTyped(int keycode) {
-		boolean typed = typedKeys.contains(keycode);
-		clear();
-		return typed;
+		return typedKeys.contains(keycode);
 	}
 
 	public static boolean isKeyPressed(int keycode) {
