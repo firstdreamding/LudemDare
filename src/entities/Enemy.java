@@ -9,6 +9,8 @@ public class Enemy extends Entity {
 	Player player;
 	WaveHandler wh;
 	Hurtbox hurtbox;
+	int gold = 10;
+	boolean alive = true;
 
 	public Enemy(int x, int y, int w, int h, int dir, int zombieNum, Player p, WaveHandler wh) {
 		super(x, y, w, h, dir, new Texture("/res/sprites/zombie" + zombieNum + ".png", w, h));
@@ -19,8 +21,12 @@ public class Enemy extends Entity {
 
 	@Override
 	public void handleDeath() {
-		System.out.println("enemydead");
-		wh.remove(this);
+		if (alive) {
+			alive = false;
+			System.out.println("enemydead");
+			wh.remove(this);
+			player.addGold(gold);
+		}
 	}
 
 	public void setHurtbox(Hurtbox hurtbox) {

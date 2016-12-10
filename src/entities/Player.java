@@ -85,8 +85,8 @@ public class Player extends Entity {
 			}
 		} else {
 			xvel = 0;
-			if(!(AnimationController.playerState == AnimationController.State.DEAD))
-			AnimationController.setNone(this);
+			if (!(AnimationController.playerState == AnimationController.State.DEAD))
+				AnimationController.setNone(this);
 		}
 
 		if (Math.abs(yvel) - traction > 0) {
@@ -114,6 +114,10 @@ public class Player extends Entity {
 		moveQueue.add(playerID, move);
 	}
 
+	public void addGold(int gold) {
+		this.gold += gold;
+	}
+
 	private void handleInput() {
 		if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
 			dir = -1;
@@ -126,12 +130,12 @@ public class Player extends Entity {
 		}
 
 		if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
-			setDir(0,1);
+			setDir(0, 1);
 			dir = -2;
 			yvel = -3;
 			walk();
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_S)) {
-			setDir(0,0);
+			setDir(0, 0);
 			dir = 0;
 			yvel = 3;
 			walk();
@@ -143,20 +147,17 @@ public class Player extends Entity {
 		}
 
 		if (Main.getInstance().tick - weapon.cooldown >= tickLU) {
-			if (InputHandler.isKeyPressed(KeyEvent.VK_RIGHT)){
+			if (InputHandler.isKeyPressed(KeyEvent.VK_RIGHT)) {
 				weapon.use(this, 1, 0);
 				tickLU = Main.getInstance().tick;
-			}
-			else if (InputHandler.isKeyPressed(KeyEvent.VK_UP)){
+			} else if (InputHandler.isKeyPressed(KeyEvent.VK_UP)) {
 				ydir = 1;
 				weapon.use(this, 0, -1);
 				tickLU = Main.getInstance().tick;
-			}
-			else if (InputHandler.isKeyPressed(KeyEvent.VK_LEFT)){
+			} else if (InputHandler.isKeyPressed(KeyEvent.VK_LEFT)) {
 				tickLU = Main.getInstance().tick;
 				weapon.use(this, -1, 0);
-			}
-			else if (InputHandler.isKeyPressed(KeyEvent.VK_DOWN)){
+			} else if (InputHandler.isKeyPressed(KeyEvent.VK_DOWN)) {
 				ydir = 0;
 				weapon.use(this, 0, 1);
 				tickLU = Main.getInstance().tick;
@@ -165,17 +166,18 @@ public class Player extends Entity {
 	}
 
 	private void walk() {
-		if(!(AnimationController.playerState == AnimationController.State.WALK))
+		if (!(AnimationController.playerState == AnimationController.State.WALK))
 			AnimationController.playerState = AnimationController.State.WALK;
-		
+
 	}
 
-	public void setDir(int xdir, int ydir){
-		if (Main.getInstance().tick - weapon.cooldown >= tickLU){
+	public void setDir(int xdir, int ydir) {
+		if (Main.getInstance().tick - weapon.cooldown >= tickLU) {
 			this.xdir = xdir;
 			this.ydir = ydir;
 		}
 	}
+
 	public void setT(int x, int y) {
 		sprite = sheet.getTexture(x, y);
 
