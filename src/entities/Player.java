@@ -47,7 +47,7 @@ public class Player extends Entity {
 		ydir = 0;
 		playern = pid;
 		moveQueue = new MoveQueue();
-		weapon = (Weapon) Item.Ak47;
+		weapon = (Weapon) Item.Shotgun;
 		gold = 0;
 		tickLU = 0;
 		// TODO Auto-generated constructor stub
@@ -136,7 +136,7 @@ public class Player extends Entity {
 			yvel = 3;
 			walk();
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_B)) {
-			if (!Main.getInstance().level.wh.inWave) {
+			if (Main.getInstance().level.wh.inWave) {
 				Main.getInstance().inMenu = true;
 				Main.getInstance().state = Main.State.MENU;
 			}

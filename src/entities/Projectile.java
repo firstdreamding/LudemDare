@@ -9,6 +9,8 @@ public class Projectile extends Entity {
 	public long start;
 	public Hitbox hit;
 	SoundPlayer soundplayer;
+	public static boolean playOff = false;
+
 	public Projectile(int x, int y, int w, int h, int xvel, int yvel, int damage, int dur, String s, String path) {
 		super(x, y, w, h, 0, new Texture("/res/sprites/" + s + ".png", w, h));
 		marginX = 0;
@@ -21,9 +23,11 @@ public class Projectile extends Entity {
 		this.xvel = xvel;
 		this.yvel = yvel;
 		hit = new Hitbox(damage, 0, 0, w, h, 0, 0, dur, this, true);
-		soundplayer = new SoundPlayer(path);
-		soundplayer.setVolume(0.1);
-		soundplayer.play();
+		if (!playOff) {
+			soundplayer = new SoundPlayer(path);
+			soundplayer.setVolume(0.1);
+			soundplayer.play();
+		}
 		start = System.currentTimeMillis();
 	}
 
@@ -33,7 +37,7 @@ public class Projectile extends Entity {
 	}
 
 	public boolean expired() {
-		return System.currentTimeMillis() - start > dur || y < 150 || x > 860|| x < 50;
+		return System.currentTimeMillis() - start > dur || y < 150 || x > 860 || x < 50;
 
 	}
 
