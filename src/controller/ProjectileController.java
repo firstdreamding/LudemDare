@@ -4,17 +4,26 @@ import java.util.ArrayList;
 
 import entities.Hitbox;
 import entities.Projectile;
+import graphics.Screen;
 
 public class ProjectileController {
 	public ArrayList<Projectile> active;
 	public ArrayList<Projectile> remove;
+	private HitboxController hbc;
 
-	public ProjectileController() {
+	public ProjectileController(HitboxController hbc) {
 		active = new ArrayList<Projectile>();
 		remove = new ArrayList<Projectile>();
+		this.hbc = hbc;
 	}
 
 	int removeSize;
+
+	public void render(Screen screen) {
+		for (Projectile p : active) {
+			screen.drawTexture(p.x, p.y, p.sprite);
+		}
+	}
 
 	public void update() {
 		removeSize = remove.size();
@@ -31,7 +40,8 @@ public class ProjectileController {
 		}
 	}
 
-	public void add(Projectile p) {
+	public void add(Projectile p, int i) {
+		hbc.add(p.hit.reset(), i);
 		active.add(p);
 	}
 

@@ -22,8 +22,8 @@ public class Hurtbox extends Rectangle {
 	public Hurtbox(Player e) {
 		width = e.getW();
 		height = e.getH();
-		x = e.getX() + e.marginX;
-		y = e.getY() + e.marginY;
+		x = e.getX();
+		y = e.getY();
 		this.e = e;
 	}
 
@@ -32,9 +32,9 @@ public class Hurtbox extends Rectangle {
 	}
 
 	public void update() {
-		x = e.getX() + e.marginX;
+		x = e.getX();
 		;
-		y = e.getY() +e.marginY;
+		y = e.getY();
 
 	}
 }

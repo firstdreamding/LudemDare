@@ -26,12 +26,13 @@ public class HitboxController {
 
 	public void update() {
 		doRemove();
-		for (Hitbox t2hit : team2Hit) {
-			t2hit.update();
-			if (t2hit.expired()) {
-				removeThese.add(t2hit);
-			} 
-			for (Hurtbox t1hurt : team1Hurt) {
+		for (Hurtbox t1hurt : team1Hurt) {
+			t1hurt.update();
+			for (Hitbox t2hit : team2Hit) {
+				t2hit.update();
+				if (t2hit.expired()) {
+					removeThese.add(t2hit);
+				}
 				if (t1hurt.intersects(t2hit)) {
 					t1Hit(t2hit, t1hurt);
 				}
@@ -41,7 +42,7 @@ public class HitboxController {
 			t1hit.update();
 			if (t1hit.expired()) {
 				removeThese.add(t1hit);
-			} 
+			}
 			for (Hurtbox t2hurt : team2Hurt) {
 				if (t2hurt.intersects(t1hit)) {
 					t2Hit(t1hit, t2hurt);
@@ -99,6 +100,9 @@ public class HitboxController {
 	public void render(Screen screen) {
 		for (Hitbox h : team1Hit) {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0xFF0000);
+		}
+		for (Hurtbox h : team1Hurt) {
+			screen.drawRect(h.x, h.y, h.width, h.height, 0x0000FF);
 		}
 	}
 }
