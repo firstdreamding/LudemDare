@@ -41,6 +41,7 @@ public class Level {
 		ac.add(new Hurtbox(player), 0);
 		ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
 		animationController = new AnimationController();
+		animationController.playerState = AnimationController.State.NONE;
 	}
 
 	public void render(Screen screen) {

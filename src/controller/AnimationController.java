@@ -9,7 +9,7 @@ public class AnimationController {
 		NONE, MOVE, WALK, DEAD;
 	};
 	
-	State playerState = State.WALK;
+	public static State playerState = State.DEAD;
 	int animationTick, counter;
 	long lastTick;
 	public AnimationController(){
@@ -26,5 +26,9 @@ public class AnimationController {
 			counter++;
 			lastTick =  Main.getInstance().tick;
 		}
+	}
+
+	public static void setNone(Player player) {
+		playerState = State.NONE;		
 	}
 }

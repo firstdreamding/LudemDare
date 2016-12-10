@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Map;
 
+import controller.AnimationController;
 import controller.InputHandler;
 import graphics.Screen;
 import graphics.SpriteSheet;
@@ -84,6 +85,8 @@ public class Player extends Entity {
 			}
 		} else {
 			xvel = 0;
+			if(!(AnimationController.playerState == AnimationController.State.DEAD))
+				AnimationController.setNone(this);
 		}
 
 		if (Math.abs(yvel) - traction > 0) {
@@ -115,19 +118,23 @@ public class Player extends Entity {
 		if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
 			dir = -1;
 			xvel = -3;
+			walk();
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
 			dir = 1;
 			xvel = 3;
+			walk();
 		}
 
 		if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
 			setDir(0,1);
 			dir = -2;
 			yvel = -3;
+			walk();
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_S)) {
 			setDir(0,0);
 			dir = 0;
 			yvel = 3;
+			walk();
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_B)) {
 			if (!Main.getInstance().level.wh.inWave) {
 				Main.getInstance().inMenu = true;
@@ -150,6 +157,12 @@ public class Player extends Entity {
 			}
 			tickLU = Main.getInstance().tick;
 		}
+	}
+
+	private void walk() {
+		if(!(AnimationController.playerState == AnimationController.State.WALK))
+			AnimationController.playerState = AnimationController.State.WALK;
+		
 	}
 
 	public void setDir(int xdir, int ydir){
