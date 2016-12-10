@@ -15,8 +15,8 @@ public class Player extends Entity {
 	public int specialbar = 0;
 	public int dir;
 	private int playerID;
-	public int moveSpeed, special, lastHealth, tolerance;
-	public int traction = 4;
+	public int moveSpeed, special, lastHealth;
+	public int traction = 1;
 	public String name;
 	public int gold;
 	public SpriteSheet sheet;
@@ -67,9 +67,18 @@ public class Player extends Entity {
 			} else {
 				xvel += traction;
 			}
-
 		} else {
 			xvel = 0;
+		}
+		
+		if (Math.abs(yvel) - traction > 0) {
+			if (yvel > 0) {
+				yvel -= traction;
+			} else {
+				yvel += traction;
+			}
+		} else {
+			yvel = 0;
 		}
 
 		handleInput();
@@ -91,11 +100,16 @@ public class Player extends Entity {
 
 	private void handleInput() {
 		if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
-			xvel = -5;
+			xvel = -3;
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
-			xvel = 5;
-		} else if (!(xvel == 0))
-			xvel = 0;
+			xvel = 3;
+		}
+		
+		if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
+			yvel = -3;
+		} else if (InputHandler.isKeyPressed(KeyEvent.VK_S)) {
+			yvel = 3;
+		} 
 	}
 
 	public void setT(int x, int y) {
