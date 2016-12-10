@@ -27,4 +27,9 @@ public class Level {
 		player.update();
 	}
 
+	public Player getPlayer() {
+		return player;
+
+	};
+
 }
