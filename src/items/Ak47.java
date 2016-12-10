@@ -1,4 +1,6 @@
-package entities;
+package items;
+import entities.Entity;
+import entities.Player;
 import graphics.Texture;
 
 public class Ak47 extends Weapon{

@@ -1,4 +1,4 @@
-package entities;
+package items;
 
 import graphics.Texture;
 

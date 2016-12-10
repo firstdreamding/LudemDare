@@ -1,8 +1,9 @@
-package entities;
+package items;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import entities.Entity;
 import graphics.Texture;
 
 
