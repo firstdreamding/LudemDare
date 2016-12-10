@@ -13,10 +13,8 @@ public class Main {
 	}
 
 	ClassLoader cl = getClass().getClassLoader();
-
-	Texture t = new Texture("/res/1default.png", 100, 100);
-	Player player = new Player(0, 100, 0, t.getWidth(), t.getHeight(), 1, t);
-	Texture bg = new Texture("/res/bg.png", 960, 540);
+	Player player;
+	Texture bg;
 	Level level;
 	long tick, timeLR;
 	double fps;
@@ -27,8 +25,9 @@ public class Main {
 	}
 
 	private void init() {
-		// TODO Auto-generated method stub
 		level = new Level();
+		bg = new Texture("/res/bg.png", 960, 540);
+		player = new Player(0, 100, 0, 100, 100, 1, new Texture("/res/1default.png", 100, 100));
 		tick = 0;
 		fps = 1000 / 60;
 		timeLR = System.currentTimeMillis();
