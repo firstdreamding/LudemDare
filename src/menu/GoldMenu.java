@@ -3,6 +3,10 @@ package menu;
 import graphics.Screen;
 
 public class GoldMenu extends Menu {
+	GoldMenu(){
+		
+	}
+	
 	public void update() {
 	}
 
