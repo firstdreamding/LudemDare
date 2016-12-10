@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import entities.Hitbox;
 import entities.Projectile;
 import graphics.Screen;
 
@@ -43,6 +44,14 @@ public class ProjectileController {
 	public void add(Projectile p, int i) {
 		hbc.add(p.hit.reset(), i);
 		active.add(p);
+	}
+
+	public void remove(Hitbox h) {
+		for (Projectile p : active) {
+			if (p.hit.equals(h)) {
+				remove(p);
+			}
+		}
 	}
 
 	public void remove(Projectile p) {

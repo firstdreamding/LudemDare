@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 
 import entities.Enemy;
+import entities.Hurtbox;
 import entities.Player;
 import graphics.Screen;
 import graphics.Texture;
@@ -33,7 +34,7 @@ public class WaveHandler {
 
 	public void add(Enemy e) {
 		enemyList.add(e);
-
+		hbc.add(new Hurtbox(e, e.w, e.h, 0, 0), 1);
 	}
 
 	public void update() {

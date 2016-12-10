@@ -38,12 +38,13 @@ public class HitboxController {
 				}
 			}
 		}
-		for (Hitbox t1hit : team1Hit) {
-			t1hit.update();
-			if (t1hit.expired()) {
-				removeThese.add(t1hit);
-			}
-			for (Hurtbox t2hurt : team2Hurt) {
+		for (Hurtbox t2hurt : team2Hurt) {
+			t2hurt.update();
+			for (Hitbox t1hit : team1Hit) {
+				t1hit.update();
+				if (t1hit.expired()) {
+					removeThese.add(t1hit);
+				}
 				if (t2hurt.intersects(t1hit)) {
 					t2Hit(t1hit, t2hurt);
 				}
@@ -53,10 +54,12 @@ public class HitboxController {
 
 	public void t1Hit(Hitbox hit, Hurtbox hurt) {
 		hurt.getEntity().subHealth(hit.dmg);
+		remove(hit);
 	}
 
 	public void t2Hit(Hitbox hit, Hurtbox hurt) {
-
+		System.out.println("hit enmy");
+		remove(hit);
 	}
 
 	// Internal function ignore this
@@ -102,6 +105,12 @@ public class HitboxController {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0xFF0000);
 		}
 		for (Hurtbox h : team1Hurt) {
+			screen.drawRect(h.x, h.y, h.width, h.height, 0x0000FF);
+		}
+		for (Hitbox h : team2Hit) {
+			screen.drawRect(h.x, h.y, h.width, h.height, 0xFF0000);
+		}
+		for (Hurtbox h : team2Hurt) {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0x0000FF);
 		}
 	}
