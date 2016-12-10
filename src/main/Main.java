@@ -1,4 +1,4 @@
- package main;
+package main;
 
 import controller.HitboxController;
 import controller.InputHandler;
@@ -13,6 +13,11 @@ public class Main {
 		instance = this;
 	}
 
+	public enum State {
+		MENU, GAME;
+	};
+
+	State state = State.GAME;
 	ClassLoader cl = getClass().getClassLoader();
 	Player player;
 	Texture bg;
@@ -32,6 +37,7 @@ public class Main {
 		tick = 0;
 		fps = 1000 / 60;
 		timeLR = System.currentTimeMillis();
+		
 
 	}
 
@@ -43,9 +49,14 @@ public class Main {
 
 		while (true) {
 			if ((double) (System.currentTimeMillis() - timeLR) > fps) {
+				if (state.equals(State.GAME)) {
+					level.update(screen);
+					window.update();				
+					}
+				else if (state.equals(State.MENU)){
+					
+				}
 				screen.clear(255255255);
-				level.update(screen);
-				window.update();
 				timeLR = System.currentTimeMillis();
 				tick++;
 				InputHandler.clear();
