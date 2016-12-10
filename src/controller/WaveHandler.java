@@ -14,15 +14,15 @@ public class WaveHandler {
 
 	Texture zombie1;
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+	ArrayList<Enemy> remove = new ArrayList<Enemy>();
 	public int wave;
 	Player player;
-	AttackController hbc;
+	AttackController ac;
 
 	public WaveHandler(Player p, AttackController hbc) {
 		player = p;
-		this.hbc = hbc;
-		Enemy e = new Enemy(10, 10, 50, 50, 1, 1, player);
-		add(e);
+		this.ac = hbc;
+		add(10, 10, 50, 50, 1, 1);
 
 	}
 
@@ -32,14 +32,25 @@ public class WaveHandler {
 		}
 	}
 
-	public void add(Enemy e) {
+	public void add(int x, int y, int w, int h, int dir, int zombieNum) {
+		Enemy e = new Enemy(x, y, w, h, dir, zombieNum, player, this);
 		enemyList.add(e);
-		hbc.add(new Hurtbox(e, e.w, e.h, 0, 0), 1);
+		ac.add(new Hurtbox(e, e.w, e.h, 0, 0), 1);
+	}
+
+	public void remove(Enemy e) {
+		remove.add(e);
 	}
 
 	public void update() {
 		if (!inWave)
 			return;
+		int remLen = remove.size();
+		for (int i = 0; i < remLen; i++) {
+			enemyList.remove(remove.get(0));
+			remove.remove(0);
+
+		}
 		for (Enemy e : enemyList) {
 			e.pathFind();
 		}

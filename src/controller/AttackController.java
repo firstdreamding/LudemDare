@@ -14,8 +14,8 @@ public class AttackController {
 	ArrayList<Hurtbox> team2Hurt;
 	ArrayList<Hitbox> item;
 	ArrayList<Hitbox> removeH;
-	public ArrayList<Projectile> projectiles;
-	public ArrayList<Projectile> removeP;
+	private ArrayList<Projectile> projectiles;
+	private ArrayList<Projectile> removeP;
 
 	public AttackController() {
 		// Hitboxes
@@ -72,7 +72,7 @@ public class AttackController {
 	}
 
 	public void t2Hit(Hitbox hit, Hurtbox hurt) {
-		System.out.println("hit enmy");
+		hurt.getEntity().subHealth(hit.dmg);
 		remove(hit);
 	}
 

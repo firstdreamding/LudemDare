@@ -1,21 +1,25 @@
 package entities;
 
+import controller.AttackController;
+import controller.WaveHandler;
 import graphics.Texture;
-import main.Main;
 
 public class Enemy extends Entity {
 	final int vel = 1;
 	Player player;
+	WaveHandler wh;
 
-	public Enemy(int x, int y, int w, int h, int dir, int zombieNum, Player p) {
+	public Enemy(int x, int y, int w, int h, int dir, int zombieNum, Player p, WaveHandler wh) {
 		super(x, y, w, h, dir, new Texture("/res/sprites/zombie" + zombieNum + ".png", w, h));
-		health = 10;
+		health = 50;
 		player = p;
+		this.wh = wh;
 	}
 
 	@Override
 	public void handleDeath() {
-		System.out.println("dead");
+		System.out.println("enemydead");
+		wh.remove(this);
 	}
 
 	public void pathFind() {
