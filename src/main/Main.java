@@ -27,7 +27,8 @@ public class Main {
 	public Level level;
 	HitboxController hbc;
 	Menu menu = new GoldMenu();
-	long tick, timeLR;
+	public long tick;
+	long timeLR;
 	double fps;
 	public static Main instance;
 	public final int WINDOWX = 960;

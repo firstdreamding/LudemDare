@@ -20,7 +20,7 @@ public class Level {
 	public ProjectileController pc;
 	Font defFont;
 	int wave = 0;
-	boolean inWave = false;
+	public boolean inWave = false;
 
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);

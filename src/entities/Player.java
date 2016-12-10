@@ -8,6 +8,8 @@ import controller.InputHandler;
 import graphics.Screen;
 import graphics.SpriteSheet;
 import graphics.Texture;
+import items.Item;
+import items.Weapon;
 import main.KeyMap;
 import main.Main;
 import main.MoveQueue;
@@ -19,11 +21,13 @@ public class Player extends Entity {
 	private int playerID;
 	public int moveSpeed, special, lastHealth;
 	public int traction = 1;
+	public Weapon weapon;
 	public String name;
 	public int gold;
 	public SpriteSheet sheet;
 	public MoveQueue moveQueue;
 	public ArrayList<Integer> inventory;
+	long tickLU;
 
 	private Map<String, Integer> keys;
 
@@ -37,7 +41,9 @@ public class Player extends Entity {
 		playern = pid;
 		keys = KeyMap.getKeyMapping(playerID);
 		moveQueue = new MoveQueue();
+		weapon = (Weapon) Item.Ak47;
 		gold = 0;
+		tickLU = 0;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -102,18 +108,36 @@ public class Player extends Entity {
 
 	private void handleInput() {
 		if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
+			dir = -1;
 			xvel = -3;
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
+			dir = 1;
 			xvel = 3;
 		}
 
 		if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
+			dir = -2;
 			yvel = -3;
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_S)) {
+			dir = 0;
 			yvel = 3;
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_B)) {
-			Main.getInstance().inMenu = true;
-			Main.getInstance().state = Main.State.MENU;
+			if (!Main.getInstance().level.inWave) {
+				Main.getInstance().inMenu = true;
+				Main.getInstance().state = Main.State.MENU;
+			}
+		}
+
+		if (Main.getInstance().tick - weapon.cooldown >= tickLU) {
+			if (InputHandler.isKeyPressed(KeyEvent.VK_RIGHT))
+				weapon.use(this, 1, 0);
+			else if (InputHandler.isKeyPressed(KeyEvent.VK_UP))
+				weapon.use(this, 0, -1);
+			else if (InputHandler.isKeyPressed(KeyEvent.VK_LEFT))
+				weapon.use(this, -1, 0);
+			else if (InputHandler.isKeyPressed(KeyEvent.VK_DOWN))
+				weapon.use(this, 0, 1);
+			tickLU = Main.getInstance().tick;
 		}
 	}
 
