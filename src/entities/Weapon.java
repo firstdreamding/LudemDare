@@ -1,14 +1,17 @@
 package entities;
 
-public class Weapon {
+import graphics.Texture;
+
+public class Weapon extends Item{
 	int damage;
 	int cost;
 	int id;
+	int playerHoldingState;
+	int cooldown;
 
-	public Weapon(int damage, int cost, int id) {
-		this.damage = damage;
-		this.cost = cost;
-		this.id = id;
-
+	public Weapon(int id, String name, String description, Texture texture){
+		super(id, name, description, texture);
+		damage = 10;
+		playerHoldingState = 0;
 	}
 }
