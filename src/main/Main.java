@@ -1,5 +1,6 @@
 package main;
 
+import controller.HitboxController;
 import controller.InputHandler;
 import entities.Player;
 import graphics.Screen;
@@ -16,6 +17,7 @@ public class Main {
 	Player player;
 	Texture bg;
 	Level level;
+	HitboxController hbc;
 	long tick, timeLR;
 	double fps;
 	public static Main instance;
@@ -28,6 +30,7 @@ public class Main {
 		level = new Level();
 		bg = new Texture("/res/bg.png", 960, 540);
 		player = new Player(0, 100, 0, 100, 100, 1, new Texture("/res/1default.png", 100, 100));
+		hbc = new HitboxController();
 		tick = 0;
 		fps = 1000 / 60;
 		timeLR = System.currentTimeMillis();
