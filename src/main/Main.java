@@ -19,11 +19,11 @@ public class Main {
 		MENU, GAME;
 	};
 
-	State state = State.MENU;
+	State state = State.GAME;
 	ClassLoader cl = getClass().getClassLoader();
 	Player player;
 	Texture bg;
-	Level level;
+	public Level level;
 	HitboxController hbc;
 	Menu menu = new GoldMenu();
 	long tick, timeLR;

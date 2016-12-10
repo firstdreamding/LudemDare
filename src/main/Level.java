@@ -17,7 +17,7 @@ public class Level {
 	Texture bg;
 	Texture coin;
 	HitboxController hbc;
-	ProjectileController pc;
+	public ProjectileController pc;
 	Font defFont;
 	int wave = 0;
 	boolean inWave = false;
