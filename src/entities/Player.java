@@ -9,6 +9,7 @@ import graphics.Screen;
 import graphics.SpriteSheet;
 import graphics.Texture;
 import main.KeyMap;
+import main.Main;
 import main.MoveQueue;
 
 public class Player extends Entity {
@@ -22,7 +23,6 @@ public class Player extends Entity {
 	public int gold;
 	public SpriteSheet sheet;
 	public MoveQueue moveQueue;
-
 	public ArrayList<Integer> inventory;
 
 	private Map<String, Integer> keys;
@@ -111,6 +111,9 @@ public class Player extends Entity {
 			yvel = -3;
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_S)) {
 			yvel = 3;
+		} else if (InputHandler.isKeyTyped(KeyEvent.VK_B)) {
+			Main.getInstance().inMenu = true;
+			Main.getInstance().state = Main.State.MENU;
 		}
 	}
 

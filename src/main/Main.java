@@ -19,7 +19,8 @@ public class Main {
 		MENU, GAME;
 	};
 
-	State state = State.GAME;
+	public State state = State.GAME;
+	public boolean inMenu = false;
 	ClassLoader cl = getClass().getClassLoader();
 	Player player;
 	Texture bg;
@@ -54,9 +55,8 @@ public class Main {
 		while (true) {
 			if ((double) (System.currentTimeMillis() - timeLR) > fps) {
 				if (state.equals(State.GAME)) {
-					level.update(screen);								
-					}
-				else if (state.equals(State.MENU)){
+					level.update(screen);
+				} else if (state.equals(State.MENU)) {
 					menu.render(screen);
 					menu.update();
 				}
