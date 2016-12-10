@@ -14,8 +14,7 @@ import graphics.Texture;
 
 public class Level {
 	public Player player;
-	Texture bg;
-	Texture coin;
+	Texture bg, coin, frame;
 	HitboxController hbc;
 	public ProjectileController pc;
 	Font defFont;
@@ -25,6 +24,7 @@ public class Level {
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
 		coin = new Texture("/res/sprites/coin.png", 40, 40);
+		frame = new Texture("/res/sprites/frame.png", 80, 80);
 		player = new Player(0, 150, 200, 60, 60, 1, new Texture("/res/sprites/player.png", 60, 60));
 		hbc = new HitboxController();
 		pc = new ProjectileController(hbc);
@@ -51,11 +51,13 @@ public class Level {
 		hbc.update();
 		render(screen);
 	}
-	
+
 	public void gui(Screen screen) {
 		screen.drawTexture(10, 20, coin);
+		screen.drawTexture(400,8,frame);
 		screen.drawString(String.valueOf(player.gold), 60, 55, defFont, Color.RED);
-		screen.drawTexture(100, 100, player.weapon.texture);
+		screen.drawTexture(406, 14, player.weapon.texture);
+		
 	}
 
 	public Player getPlayer() {
