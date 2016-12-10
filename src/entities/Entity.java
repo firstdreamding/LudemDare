@@ -12,6 +12,7 @@ public class Entity {
 	public boolean frozen = false;
 	public long freezeUntil;
 	public int playern;
+	public long tickLU;
 
 	/**
 	 * Constructor for entity

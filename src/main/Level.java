@@ -21,6 +21,7 @@ public class Level {
 	Font defFont;
 	AnimationController animationController;
 	int wave = 0;
+	SoundPlayer soundplayer;
 	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/player.png", 240, 120), 60, 60);
 
 	public Level() {
@@ -42,6 +43,10 @@ public class Level {
 		ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
 		animationController = new AnimationController();
 		animationController.playerState = AnimationController.State.NONE;
+		
+		soundplayer = new SoundPlayer("bg.wav");
+		soundplayer.setVolume(0.5);
+		soundplayer.play();
 	}
 
 	public void render(Screen screen) {

@@ -33,7 +33,7 @@ public class Player extends Entity {
 	int xdir;
 	public int ydir;
 	boolean weaponLock;
-	long tickLU;
+	public long tickLU;
 
 	public Player(int pid, int x, int y, int w, int h, int dir, Texture sprite) {
 		super(x, y, w, h, dir, sprite);
@@ -86,7 +86,7 @@ public class Player extends Entity {
 		} else {
 			xvel = 0;
 			if(!(AnimationController.playerState == AnimationController.State.DEAD))
-				AnimationController.setNone(this);
+			AnimationController.setNone(this);
 		}
 
 		if (Math.abs(yvel) - traction > 0) {
@@ -136,26 +136,31 @@ public class Player extends Entity {
 			yvel = 3;
 			walk();
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_B)) {
-			if (Main.getInstance().level.wh.inWave) {
+			if (!Main.getInstance().level.wh.inWave) {
 				Main.getInstance().inMenu = true;
 				Main.getInstance().state = Main.State.MENU;
 			}
 		}
 
 		if (Main.getInstance().tick - weapon.cooldown >= tickLU) {
-			if (InputHandler.isKeyPressed(KeyEvent.VK_RIGHT))
+			if (InputHandler.isKeyPressed(KeyEvent.VK_RIGHT)){
 				weapon.use(this, 1, 0);
+				tickLU = Main.getInstance().tick;
+			}
 			else if (InputHandler.isKeyPressed(KeyEvent.VK_UP)){
 				ydir = 1;
 				weapon.use(this, 0, -1);
+				tickLU = Main.getInstance().tick;
 			}
-			else if (InputHandler.isKeyPressed(KeyEvent.VK_LEFT))
+			else if (InputHandler.isKeyPressed(KeyEvent.VK_LEFT)){
+				tickLU = Main.getInstance().tick;
 				weapon.use(this, -1, 0);
+			}
 			else if (InputHandler.isKeyPressed(KeyEvent.VK_DOWN)){
 				ydir = 0;
 				weapon.use(this, 0, 1);
+				tickLU = Main.getInstance().tick;
 			}
-			tickLU = Main.getInstance().tick;
 		}
 	}
 

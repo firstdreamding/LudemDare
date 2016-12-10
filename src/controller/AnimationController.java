@@ -27,7 +27,6 @@ public class AnimationController {
 			lastTick =  Main.getInstance().tick;
 		}
 	}
-
 	public static void setNone(Player player) {
 		playerState = State.NONE;		
 	}
