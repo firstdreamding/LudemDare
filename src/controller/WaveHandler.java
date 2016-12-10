@@ -34,12 +34,16 @@ public class WaveHandler {
 
 	public void add(int x, int y, int w, int h, int dir, int zombieNum) {
 		Enemy e = new Enemy(x, y, w, h, dir, zombieNum, player, this);
+		Hurtbox hurt = new Hurtbox(e, e.w, e.h, 0, 0);
 		enemyList.add(e);
-		ac.add(new Hurtbox(e, e.w, e.h, 0, 0), 1);
+		ac.add(hurt, 1);
+		e.setHurtbox(hurt);
 	}
 
 	public void remove(Enemy e) {
 		remove.add(e);
+		ac.remove(e.getHurtbox());
+
 	}
 
 	public void update() {

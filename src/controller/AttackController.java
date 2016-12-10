@@ -14,6 +14,7 @@ public class AttackController {
 	ArrayList<Hurtbox> team2Hurt;
 	ArrayList<Hitbox> item;
 	ArrayList<Hitbox> removeH;
+	ArrayList<Hurtbox> removeHurt;
 	private ArrayList<Projectile> projectiles;
 	private ArrayList<Projectile> removeP;
 
@@ -23,6 +24,7 @@ public class AttackController {
 		team2Hit = new ArrayList<Hitbox>();
 		team1Hurt = new ArrayList<Hurtbox>();
 		team2Hurt = new ArrayList<Hurtbox>();
+		removeHurt = new ArrayList<Hurtbox>();
 		removeH = new ArrayList<Hitbox>();
 		// Projectiles
 		projectiles = new ArrayList<Projectile>();
@@ -91,6 +93,12 @@ public class AttackController {
 			team2Hit.remove(removeH.get(0));
 			removeH.remove(0);
 		}
+		int removeHur = removeHurt.size();
+		for (int i = 0; i < removeHur; i++) {
+			team1Hurt.remove(removeHurt.get(0));
+			team2Hurt.remove(removeHurt.get(0));
+			removeHurt.remove(0);
+		}
 	}
 
 	public void add(Projectile p, int i) {
@@ -100,6 +108,10 @@ public class AttackController {
 
 	public void remove(Projectile p) {
 		removeP.add(p);
+	}
+
+	public void remove(Hurtbox h) {
+		removeHurt.add(h);
 	}
 
 	public void remove(Hitbox h) {

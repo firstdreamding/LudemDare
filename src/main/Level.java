@@ -6,6 +6,7 @@ import java.awt.Font;
 import controller.AnimationController;
 import controller.AttackController;
 import controller.WaveHandler;
+import entities.Entity;
 import entities.Hitbox;
 import entities.Hurtbox;
 import entities.Player;
@@ -43,7 +44,10 @@ public class Level {
 		ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
 		animationController = new AnimationController();
 		animationController.playerState = AnimationController.State.NONE;
-		
+		Entity placeHolder = new Entity(0, 0, 0, 0, 0, null);
+		Hurtbox placeHolderBox = new Hurtbox(placeHolder, 0, 0, 0, 0);
+		ac.add(placeHolderBox, 1);
+
 		soundplayer = new SoundPlayer("bg.wav");
 		soundplayer.setVolume(0.5);
 		soundplayer.play();
