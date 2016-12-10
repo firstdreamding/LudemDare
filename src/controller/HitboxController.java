@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entities.Hitbox;
 import entities.Hurtbox;
+import graphics.Screen;
 
 public class HitboxController {
 	ArrayList<Hitbox> team1Hit;
@@ -14,17 +15,34 @@ public class HitboxController {
 
 	ArrayList<Hitbox> removeThese;
 
+	public HitboxController() {
+		team1Hit = new ArrayList<Hitbox>();
+		team2Hit = new ArrayList<Hitbox>();
+		team1Hurt = new ArrayList<Hurtbox>();
+		team2Hurt = new ArrayList<Hurtbox>();
+		removeThese = new ArrayList<Hitbox>();
+
+	}
+
 	public void update() {
 		doRemove();
-		for (Hurtbox t1hurt : team1Hurt) {
-			for (Hitbox t2hit : team2Hit) {
+		for (Hitbox t2hit : team2Hit) {
+			t2hit.update();
+			if (t2hit.expired()) {
+				removeThese.add(t2hit);
+			} 
+			for (Hurtbox t1hurt : team1Hurt) {
 				if (t1hurt.intersects(t2hit)) {
 					t1Hit(t2hit, t1hurt);
 				}
 			}
 		}
-		for (Hurtbox t2hurt : team2Hurt) {
-			for (Hitbox t1hit : team1Hit) {
+		for (Hitbox t1hit : team1Hit) {
+			t1hit.update();
+			if (t1hit.expired()) {
+				removeThese.add(t1hit);
+			} 
+			for (Hurtbox t2hurt : team2Hurt) {
 				if (t2hurt.intersects(t1hit)) {
 					t2Hit(t1hit, t2hurt);
 				}
@@ -46,7 +64,6 @@ public class HitboxController {
 		for (int i = 0; i < removeSize; i++) {
 			team1Hit.remove(removeThese.get(0));
 			team2Hit.remove(removeThese.get(0));
-			item.remove(removeThese.get(0));
 			removeThese.remove(0);
 		}
 	}
@@ -76,6 +93,12 @@ public class HitboxController {
 		case 1:
 			team2Hurt.add(h);
 			break;
+		}
+	}
+
+	public void render(Screen screen) {
+		for (Hitbox h : team1Hit) {
+			screen.drawRect(h.x, h.y, h.width, h.height, 0xFF0000);
 		}
 	}
 }

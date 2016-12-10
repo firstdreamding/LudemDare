@@ -12,7 +12,8 @@ public class Hitbox extends Rectangle {
 	public long timeStarted;
 	public Entity e;
 	public boolean projectile = false;;
-	public boolean cancellable= false;
+	public boolean cancellable = false;
+
 	/**
 	 * Hitbox entity
 	 * 
@@ -47,7 +48,6 @@ public class Hitbox extends Rectangle {
 	public Hitbox reset() {
 		timeStarted = System.currentTimeMillis();
 		return this;
-
 	}
 
 	public void setE(Entity in) {
@@ -59,13 +59,13 @@ public class Hitbox extends Rectangle {
 		return e;
 	}
 
+	public boolean expired() {
+		return (System.currentTimeMillis()>(timeStarted+ duration));
+	}
+
 	public void update() {
-		if (e.getDir() == -1) {
-			x = (e.getMidpoint()) - xdif-width;
-		} else {
-			x = e.getMidpoint() + xdif;
-		}
-		y = e.y + ydif;
+		x = e.getX();
+		y = e.getY();
 	}
 
 }

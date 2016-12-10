@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import entities.Hitbox;
 import entities.Projectile;
-import main.Main;
 
 public class ProjectileController {
 	public ArrayList<Projectile> active;
