@@ -4,26 +4,41 @@ import java.util.ArrayList;
 
 import entities.Hitbox;
 import entities.Hurtbox;
+import entities.Projectile;
 import graphics.Screen;
 
-public class HitboxController {
+public class AttackController {
 	ArrayList<Hitbox> team1Hit;
 	ArrayList<Hurtbox> team1Hurt;
 	ArrayList<Hitbox> team2Hit;
 	ArrayList<Hurtbox> team2Hurt;
 	ArrayList<Hitbox> item;
 	ArrayList<Hitbox> removeH;
+	public ArrayList<Projectile> projectiles;
+	public ArrayList<Projectile> removeP;
 
-	public HitboxController() {
+	public AttackController() {
+		// Hitboxes
 		team1Hit = new ArrayList<Hitbox>();
 		team2Hit = new ArrayList<Hitbox>();
 		team1Hurt = new ArrayList<Hurtbox>();
 		team2Hurt = new ArrayList<Hurtbox>();
 		removeH = new ArrayList<Hitbox>();
+		// Projectiles
+		projectiles = new ArrayList<Projectile>();
+		removeP = new ArrayList<Projectile>();
 
 	}
 
 	public void update() {
+		// Projectile
+		for (Projectile p : projectiles) {
+			p.update();
+			if (p.expired()) {
+				removeP.add(p);
+			}
+		}
+		// Hitboxes
 		doRemove();
 		for (Hurtbox t1hurt : team1Hurt) {
 			t1hurt.update();
@@ -58,22 +73,44 @@ public class HitboxController {
 
 	public void t2Hit(Hitbox hit, Hurtbox hurt) {
 		System.out.println("hit enmy");
-
 		remove(hit);
 	}
 
 	// Internal function ignore this
 	private void doRemove() {
-		int removeSize = removeH.size();
-		for (int i = 0; i < removeSize; i++) {
+		int removePro = removeP.size();
+		for (int i = 0; i < removePro; i++) {
+			projectiles.remove(removeP.get(0));
+			remove(removeP.get(0).hit);
+			removeP.remove(0);
+
+		}
+		int removeHit = removeH.size();
+		for (int i = 0; i < removeHit; i++) {
 			team1Hit.remove(removeH.get(0));
 			team2Hit.remove(removeH.get(0));
 			removeH.remove(0);
 		}
 	}
 
+	public void add(Projectile p, int i) {
+		add(p.hit.reset(), i);
+		projectiles.add(p);
+	}
+
+	public void remove(Projectile p) {
+		removeP.add(p);
+	}
+
 	public void remove(Hitbox h) {
 		removeH.add(h);
+		if (h.projectile) {
+			for (Projectile p : projectiles) {
+				if (p.hit.equals(h)) {
+					remove(p);
+				}
+			}
+		}
 	}
 
 	public void add(Hitbox h, int i) {
@@ -112,6 +149,9 @@ public class HitboxController {
 		}
 		for (Hurtbox h : team2Hurt) {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0x0000FF);
+		}
+		for (Projectile p : projectiles) {
+			screen.drawTexture(p.x, p.y, p.sprite);
 		}
 	}
 }

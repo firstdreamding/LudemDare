@@ -4,13 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 
 import controller.AnimationController;
-import controller.HitboxController;
-import controller.ProjectileController;
+import controller.AttackController;
 import controller.WaveHandler;
 import entities.Hitbox;
 import entities.Hurtbox;
 import entities.Player;
-import entities.Projectile;
 import graphics.Screen;
 import graphics.SpriteSheet;
 import graphics.Texture;
@@ -18,13 +16,12 @@ import graphics.Texture;
 public class Level {
 	public Player player;
 	Texture bg, coin, frame;
-	HitboxController hbc;
-	public ProjectileController pc;
+	public AttackController ac;
 	public WaveHandler wh;
 	Font defFont;
 	AnimationController animationController;
 	int wave = 0;
-	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/player.png", 240, 120),60, 60);
+	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/player.png", 240, 120), 60, 60);
 
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
@@ -32,9 +29,8 @@ public class Level {
 		frame = new Texture("/res/sprites/frame.png", 80, 80);
 		player = new Player(0, 150, 200, 60, 60, 1, playerSprites.getTexture(0, 0));
 
-		hbc = new HitboxController();
-		pc = new ProjectileController(hbc);
-		wh = new WaveHandler(player, hbc);
+		ac = new AttackController();
+		wh = new WaveHandler(player, ac);
 
 		/*
 		 * Projectile p = new Projectile(10, 70, 20, 20, 10, 0, 10, 2000,
@@ -42,24 +38,22 @@ public class Level {
 		 */
 
 		defFont = new Font("Garamond", 1, 50);
-		hbc.add(new Hurtbox(player), 0);
-		hbc.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
+		ac.add(new Hurtbox(player), 0);
+		ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
 		animationController = new AnimationController();
 	}
 
 	public void render(Screen screen) {
 		screen.drawTexture(0, 100, bg);
 		screen.drawTexture(player.getX(), player.getY(), player.getTexture());
-		pc.render(screen);
-		hbc.render(screen);
+		ac.render(screen);
 		wh.render(screen);
 		gui(screen);
 	}
 
 	public void update(Screen screen) {
 		player.update();
-		pc.update();
-		hbc.update();
+		ac.update();
 		wh.update();
 		animationController.update(playerSprites, player);
 		render(screen);

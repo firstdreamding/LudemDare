@@ -3,7 +3,7 @@ package main;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import controller.HitboxController;
+import controller.AttackController;
 import controller.InputHandler;
 import entities.Player;
 import graphics.Screen;
@@ -28,7 +28,7 @@ public class Main {
 	public Player player;
 	Texture bg;
 	public Level level;
-	HitboxController hbc;
+	AttackController hbc;
 	Menu menu = new GoldMenu();
 	public long tick;
 	long timeLR;

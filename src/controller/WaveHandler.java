@@ -16,9 +16,9 @@ public class WaveHandler {
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 	public int wave;
 	Player player;
-	HitboxController hbc;
+	AttackController hbc;
 
-	public WaveHandler(Player p, HitboxController hbc) {
+	public WaveHandler(Player p, AttackController hbc) {
 		player = p;
 		this.hbc = hbc;
 		Enemy e = new Enemy(10, 10, 50, 50, 1, 1, player);
