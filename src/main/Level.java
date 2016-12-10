@@ -40,11 +40,10 @@ public class Level {
 	public void render(Screen screen) {
 		screen.drawTexture(0, 100, bg);
 		screen.drawTexture(player.getX(), player.getY(), player.getTexture());
-		screen.drawTexture(10, 20, coin);
-		screen.drawString(String.valueOf(player.gold), 60, 55, defFont, Color.RED);
 
 		pc.render(screen);
 		hbc.render(screen);
+		gui(screen);
 	}
 
 	public void update(Screen screen) {
@@ -52,7 +51,11 @@ public class Level {
 		pc.update();
 		hbc.update();
 		render(screen);
-
+	}
+	
+	public void gui(Screen screen) {
+		screen.drawTexture(10, 20, coin);
+		screen.drawString(String.valueOf(player.gold), 60, 55, defFont, Color.RED);
 	}
 
 	public Player getPlayer() {

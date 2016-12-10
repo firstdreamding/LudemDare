@@ -63,8 +63,8 @@ public class Player extends Entity {
 				frozen = false;
 			}
 		}
-		if (x < -30) {
-			x = -30;
+		if (x < 0) {
+			x = 0;
 		}
 		if (x > 900 - w) {
 			x = 900 - w;

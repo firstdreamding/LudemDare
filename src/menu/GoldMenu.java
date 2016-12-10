@@ -37,6 +37,8 @@ public class GoldMenu extends Menu {
 		// screen.drawString(">", 410 + (960 / 2) * i, 230, arrowFont,
 		// Color.BLACK);
 		// }
+		
+		Main.getInstance().level.gui(screen);
 
 	}
 
