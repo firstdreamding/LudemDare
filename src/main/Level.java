@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import controller.HitboxController;
 import controller.ProjectileController;
+import controller.WaveHandler;
 import entities.Hitbox;
 import entities.Hurtbox;
 import entities.Player;
@@ -17,20 +18,24 @@ public class Level {
 	Texture bg, coin, frame;
 	HitboxController hbc;
 	public ProjectileController pc;
+	public WaveHandler wh;
 	Font defFont;
 	int wave = 0;
-	public boolean inWave = false;
 
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
 		coin = new Texture("/res/sprites/coin.png", 40, 40);
 		frame = new Texture("/res/sprites/frame.png", 80, 80);
 		player = new Player(0, 150, 200, 60, 60, 1, new Texture("/res/sprites/player.png", 60, 60));
+
 		hbc = new HitboxController();
 		pc = new ProjectileController(hbc);
+		wh = new WaveHandler(player, hbc);
 
-		Projectile p = new Projectile(10, 70, 20, 20, 10, 0, 10, 2000, "coin", "Ak.wav");
-		pc.add(p, 0);
+		/*
+		 * Projectile p = new Projectile(10, 70, 20, 20, 10, 0, 10, 2000,
+		 * "coin", "Ak.wav"); pc.add(p, 0);
+		 */
 
 		defFont = new Font("Garamond", 1, 50);
 		hbc.add(new Hurtbox(player), 0);
@@ -42,6 +47,7 @@ public class Level {
 		screen.drawTexture(player.getX(), player.getY(), player.getTexture());
 		pc.render(screen);
 		hbc.render(screen);
+		wh.render(screen);
 		gui(screen);
 	}
 
@@ -49,6 +55,7 @@ public class Level {
 		player.update();
 		pc.update();
 		hbc.update();
+		wh.update();
 		render(screen);
 	}
 

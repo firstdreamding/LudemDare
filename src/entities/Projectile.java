@@ -22,7 +22,7 @@ public class Projectile extends Entity {
 		this.yvel = yvel;
 		hit = new Hitbox(damage, 0, 0, w, h, 0, 0, dur, this, true);
 		soundplayer = new SoundPlayer(path);
-		soundplayer.setVolume(0.25);
+		soundplayer.setVolume(0.1);
 		soundplayer.play();
 		start = System.currentTimeMillis();
 	}

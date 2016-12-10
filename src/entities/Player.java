@@ -30,9 +30,10 @@ public class Player extends Entity {
 	public ArrayList<Integer> inventory;
 	public Item current;
 	long tickLU;
+
 	public Player(int pid, int x, int y, int w, int h, int dir, Texture sprite) {
 		super(x, y, w, h, dir, sprite);
-		playerID=0;
+		playerID = 0;
 		inventory = new ArrayList<Integer>();
 		health = 100;
 		playerID = pid;
@@ -121,7 +122,7 @@ public class Player extends Entity {
 			dir = 0;
 			yvel = 3;
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_B)) {
-			if (!Main.getInstance().level.inWave) {
+			if (!Main.getInstance().level.wh.inWave) {
 				Main.getInstance().inMenu = true;
 				Main.getInstance().state = Main.State.MENU;
 			}
