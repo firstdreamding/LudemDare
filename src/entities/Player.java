@@ -1,6 +1,7 @@
 package entities;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Map;
 
 import controller.InputHandler;
@@ -22,10 +23,13 @@ public class Player extends Entity {
 	public SpriteSheet sheet;
 	public MoveQueue moveQueue;
 
+	public ArrayList<Integer> inventory;
+
 	private Map<String, Integer> keys;
 
 	public Player(int pid, int x, int y, int w, int h, int dir, Texture sprite) {
 		super(x, y, w, h, dir, sprite);
+		inventory = new ArrayList<Integer>();
 		health = 100;
 		playerID = pid;
 		this.dir = dir;
@@ -70,7 +74,7 @@ public class Player extends Entity {
 		} else {
 			xvel = 0;
 		}
-		
+
 		if (Math.abs(yvel) - traction > 0) {
 			if (yvel > 0) {
 				yvel -= traction;
@@ -84,10 +88,8 @@ public class Player extends Entity {
 		handleInput();
 	}
 
-	private boolean keyPress(String string) {
-		// return
-		// InputHandler.isKeyPressed(KeyMap.p1Set.valueOf(string.toUpperCase()).key);
-		return InputHandler.isKeyTyped(keys.get(string));
+	public boolean inInv(int id) {
+		return inventory.contains(id);
 	}
 
 	public void render(Screen screen) {
@@ -104,12 +106,12 @@ public class Player extends Entity {
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
 			xvel = 3;
 		}
-		
+
 		if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
 			yvel = -3;
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_S)) {
 			yvel = 3;
-		} 
+		}
 	}
 
 	public void setT(int x, int y) {
