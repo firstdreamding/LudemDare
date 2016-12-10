@@ -29,7 +29,7 @@ public class Projectile extends Entity {
 	}
 
 	public boolean expired() {
-		return System.currentTimeMillis() - start > dur;
+		return System.currentTimeMillis() - start > dur || y < 150 || x > 860|| x < 50;
 
 	}
 

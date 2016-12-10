@@ -25,7 +25,7 @@ public class Level {
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
 		coin = new Texture("/res/sprites/coin.png", 40, 40);
-		player = new Player(0, 69, 0, 60, 60, 1, new Texture("/res/sprites/player.png", 60, 60));
+		player = new Player(0, 150, 200, 60, 60, 1, new Texture("/res/sprites/player.png", 60, 60));
 		hbc = new HitboxController();
 		pc = new ProjectileController(hbc);
 

@@ -28,7 +28,7 @@ public class GoldMenu extends Menu {
 
 	public void render(Screen screen) {
 		screen.drawRect(Main.getInstance().WINDOWX / 2 - 100, Main.getInstance().WINDOWY / 2 - 100, 200, 200, 0x000000);
-		screen.drawString("Gold Shop", 100, 40, defFont, Color.YELLOW);
+		screen.drawString("Gold Shop", 100, 140, defFont, Color.YELLOW);
 		// for (int i = 0; i < 2; i++) {
 		// if (selectedCharacter[i] > 0)
 		// screen.drawString("<", 30 + (960 / 2) * i, 230, arrowFont,
