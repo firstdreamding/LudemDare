@@ -8,7 +8,7 @@ import graphics.Texture;
 
 
 public class Item {
-	public Item(int id, String name, String description, Texture texture){
+	public Item(int id, String name, String description){
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -20,6 +20,7 @@ public class Item {
 	String name, description;
 	Texture texture;
 	
+	public static Item sword = new Ak47(0);
 	private static Map<Integer, Item> items = new HashMap<Integer, Item>();
 	
 	public static final Item getByID(int id) {

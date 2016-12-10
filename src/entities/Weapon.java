@@ -9,8 +9,8 @@ public class Weapon extends Item{
 	int playerHoldingState;
 	int cooldown;
 
-	public Weapon(int id, String name, String description, Texture texture){
-		super(id, name, description, texture);
+	public Weapon(int id, String name, String description){
+		super(id, name, description);
 		damage = 10;
 		playerHoldingState = 0;
 	}
