@@ -12,15 +12,14 @@ public class HitboxController {
 	ArrayList<Hitbox> team2Hit;
 	ArrayList<Hurtbox> team2Hurt;
 	ArrayList<Hitbox> item;
-
-	ArrayList<Hitbox> removeThese;
+	ArrayList<Hitbox> removeH;
 
 	public HitboxController() {
 		team1Hit = new ArrayList<Hitbox>();
 		team2Hit = new ArrayList<Hitbox>();
 		team1Hurt = new ArrayList<Hurtbox>();
 		team2Hurt = new ArrayList<Hurtbox>();
-		removeThese = new ArrayList<Hitbox>();
+		removeH = new ArrayList<Hitbox>();
 
 	}
 
@@ -31,7 +30,7 @@ public class HitboxController {
 			for (Hitbox t2hit : team2Hit) {
 				t2hit.update();
 				if (t2hit.expired()) {
-					removeThese.add(t2hit);
+					removeH.add(t2hit);
 				}
 				if (t1hurt.intersects(t2hit)) {
 					t1Hit(t2hit, t1hurt);
@@ -43,7 +42,7 @@ public class HitboxController {
 			for (Hitbox t1hit : team1Hit) {
 				t1hit.update();
 				if (t1hit.expired()) {
-					removeThese.add(t1hit);
+					removeH.add(t1hit);
 				}
 				if (t2hurt.intersects(t1hit)) {
 					t2Hit(t1hit, t2hurt);
@@ -59,21 +58,22 @@ public class HitboxController {
 
 	public void t2Hit(Hitbox hit, Hurtbox hurt) {
 		System.out.println("hit enmy");
+
 		remove(hit);
 	}
 
 	// Internal function ignore this
 	private void doRemove() {
-		int removeSize = removeThese.size();
+		int removeSize = removeH.size();
 		for (int i = 0; i < removeSize; i++) {
-			team1Hit.remove(removeThese.get(0));
-			team2Hit.remove(removeThese.get(0));
-			removeThese.remove(0);
+			team1Hit.remove(removeH.get(0));
+			team2Hit.remove(removeH.get(0));
+			removeH.remove(0);
 		}
 	}
 
 	public void remove(Hitbox h) {
-		removeThese.add(h);
+		removeH.add(h);
 	}
 
 	public void add(Hitbox h, int i) {
