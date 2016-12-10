@@ -11,9 +11,10 @@ import main.KeyMap;
 import main.MoveQueue;
 
 public class Player extends Entity {
-
+	
 	public int specialbar = 0;
 	public int dir;
+	public int gold;
 	private int playerID;
 	public int moveSpeed, special, lastHealth, tolerance;
 	public int traction = 4;
@@ -25,6 +26,7 @@ public class Player extends Entity {
 
 	public Player(int pid, int x, int y, int w, int h, int dir, Texture sprite) {
 		super(x, y, w, h, dir, sprite);
+		gold = 0;
 		health = 100;
 		playerID = pid;
 		this.dir = dir;
@@ -36,8 +38,9 @@ public class Player extends Entity {
 	}
 
 	public void init() {
-
+		
 	}
+
 	@Override
 	public void handleDeath() {
 		System.out.println("dead");
@@ -87,7 +90,7 @@ public class Player extends Entity {
 	}
 
 	private void handleInput() {
-		if(InputHandler.isKeyTyped(KeyEvent.VK_A)) {
+		if (InputHandler.isKeyTyped(KeyEvent.VK_A)) {
 			System.out.println("right");
 		}
 	}
