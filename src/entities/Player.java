@@ -18,6 +18,7 @@ public class Player extends Entity {
 	public int moveSpeed, special, lastHealth, tolerance;
 	public int traction = 4;
 	public String name;
+	public int gold;
 	public SpriteSheet sheet;
 	public MoveQueue moveQueue;
 
@@ -32,12 +33,14 @@ public class Player extends Entity {
 		playern = pid;
 		keys = KeyMap.getKeyMapping(playerID);
 		moveQueue = new MoveQueue();
+		gold = 0;
 		// TODO Auto-generated constructor stub
 	}
 
 	public void init() {
 
 	}
+
 	@Override
 	public void handleDeath() {
 		System.out.println("dead");
@@ -87,11 +90,11 @@ public class Player extends Entity {
 	}
 
 	private void handleInput() {
-		if(InputHandler.isKeyPressed(KeyEvent.VK_A)) {
+		if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
 			xvel = -5;
-		} else if(InputHandler.isKeyPressed(KeyEvent.VK_D)) {
+		} else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
 			xvel = 5;
-		} else if(!(xvel == 0))
+		} else if (!(xvel == 0))
 			xvel = 0;
 	}
 
