@@ -1,5 +1,8 @@
 package main;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import controller.HitboxController;
 import controller.InputHandler;
 import entities.Player;
@@ -47,9 +50,25 @@ public class Main {
 
 	}
 
+	int tempx, tempy = 0;
+
 	private void loop() throws InterruptedException {
 		Window window = new Window("Game", 960, 640);
 		window.show();
+
+		window.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				super.mousePressed(e);
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					tempx = e.getX();
+					tempy = e.getY();
+					System.out.println(tempx + "," + tempy);
+				} else if (e.getButton() == MouseEvent.BUTTON3) {
+					System.out.println("Wdidth,Height: " + (e.getX() - tempx) + "," + (e.getY() - tempy));
+				}
+			}
+		});
 		Screen screen = window.getScreen();
 		window.addKeyListener(new InputHandler());
 

@@ -29,7 +29,7 @@ public class Level {
 		hbc = new HitboxController();
 		pc = new ProjectileController(hbc);
 
-		Projectile p = new Projectile(10, 10, 20, 20, 10, 0, 10, 2000, "coin");
+		Projectile p = new Projectile(10, 70, 20, 20, 10, 0, 10, 2000, "coin");
 		pc.add(p, 0);
 
 		defFont = new Font("Garamond", 1, 50);
@@ -40,7 +40,6 @@ public class Level {
 	public void render(Screen screen) {
 		screen.drawTexture(0, 100, bg);
 		screen.drawTexture(player.getX(), player.getY(), player.getTexture());
-
 		pc.render(screen);
 		hbc.render(screen);
 		gui(screen);
@@ -56,6 +55,7 @@ public class Level {
 	public void gui(Screen screen) {
 		screen.drawTexture(10, 20, coin);
 		screen.drawString(String.valueOf(player.gold), 60, 55, defFont, Color.RED);
+		screen.drawTexture(100, 100, player.weapon.texture);
 	}
 
 	public Player getPlayer() {

@@ -8,6 +8,7 @@ import controller.InputHandler;
 import graphics.Screen;
 import graphics.SpriteSheet;
 import graphics.Texture;
+import items.Ak47;
 import items.Item;
 import items.Weapon;
 import main.KeyMap;
@@ -27,19 +28,17 @@ public class Player extends Entity {
 	public SpriteSheet sheet;
 	public MoveQueue moveQueue;
 	public ArrayList<Integer> inventory;
+	public Item current;
 	long tickLU;
-
-	private Map<String, Integer> keys;
-
 	public Player(int pid, int x, int y, int w, int h, int dir, Texture sprite) {
 		super(x, y, w, h, dir, sprite);
+		playerID=0;
 		inventory = new ArrayList<Integer>();
 		health = 100;
 		playerID = pid;
 		this.dir = dir;
 		special = 0;
 		playern = pid;
-		keys = KeyMap.getKeyMapping(playerID);
 		moveQueue = new MoveQueue();
 		weapon = (Weapon) Item.Ak47;
 		gold = 0;

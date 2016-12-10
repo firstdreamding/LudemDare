@@ -2,7 +2,6 @@ package controller;
 
 import java.util.ArrayList;
 
-import entities.Hitbox;
 import entities.Projectile;
 import graphics.Screen;
 
@@ -29,6 +28,7 @@ public class ProjectileController {
 		removeSize = remove.size();
 		for (int i = 0; i < removeSize; i++) {
 			active.remove(remove.get(0));
+			hbc.remove(remove.get(0).hit);
 			remove.remove(0);
 
 		}
@@ -47,13 +47,5 @@ public class ProjectileController {
 
 	public void remove(Projectile p) {
 		remove.add(p);
-	}
-
-	public void remove(Hitbox h) {
-		for (Projectile p : active) {
-			if (p.hit.equals(h)) {
-				remove(p);
-			}
-		}
 	}
 }

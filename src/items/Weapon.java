@@ -14,8 +14,8 @@ public class Weapon extends Item{
 		super(id, name, description);
 		damage = 10;
 		playerHoldingState = 0;
+		texture = new Texture("/res/sprites/items/ak47.png", 60, 60);
 	}
-	
 	public void use(Entity entity, int xvel, int yvel){
 		
 	}
