@@ -1,14 +1,15 @@
 package entities;
 
 import graphics.Texture;
+import main.SoundPlayer;
 
 public class Projectile extends Entity {
 	public int damage;
 	public int dur;
 	public long start;
 	public Hitbox hit;
-
-	public Projectile(int x, int y, int w, int h, int xvel, int yvel, int damage, int dur, String s) {
+	SoundPlayer soundplayer;
+	public Projectile(int x, int y, int w, int h, int xvel, int yvel, int damage, int dur, String s, String path) {
 		super(x, y, w, h, 0, new Texture("/res/sprites/" + s + ".png", w, h));
 		marginX = 0;
 		marginY = 0;
@@ -20,6 +21,9 @@ public class Projectile extends Entity {
 		this.xvel = xvel;
 		this.yvel = yvel;
 		hit = new Hitbox(damage, 0, 0, w, h, 0, 0, dur, this, true);
+		soundplayer = new SoundPlayer(path);
+		soundplayer.setVolume(0.25);
+		soundplayer.play();
 		start = System.currentTimeMillis();
 	}
 
