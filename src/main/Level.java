@@ -13,7 +13,7 @@ import graphics.Screen;
 import graphics.Texture;
 
 public class Level {
-	Player player;
+	public Player player;
 	Texture bg;
 	Texture coin;
 	HitboxController hbc;
