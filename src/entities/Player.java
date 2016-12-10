@@ -29,6 +29,9 @@ public class Player extends Entity {
 	public MoveQueue moveQueue;
 	public ArrayList<Integer> inventory;
 	public Item current;
+	int xdir;
+	public int ydir;
+	boolean weaponLock;
 	long tickLU;
 
 	public Player(int pid, int x, int y, int w, int h, int dir, Texture sprite) {
@@ -39,6 +42,8 @@ public class Player extends Entity {
 		playerID = pid;
 		this.dir = dir;
 		special = 0;
+		xdir = 0;
+		ydir = 0;
 		playern = pid;
 		moveQueue = new MoveQueue();
 		weapon = (Weapon) Item.Ak47;
@@ -116,9 +121,11 @@ public class Player extends Entity {
 		}
 
 		if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
+			setDir(0,1);
 			dir = -2;
 			yvel = -3;
 		} else if (InputHandler.isKeyPressed(KeyEvent.VK_S)) {
+			setDir(0,0);
 			dir = 0;
 			yvel = 3;
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_B)) {
@@ -131,16 +138,26 @@ public class Player extends Entity {
 		if (Main.getInstance().tick - weapon.cooldown >= tickLU) {
 			if (InputHandler.isKeyPressed(KeyEvent.VK_RIGHT))
 				weapon.use(this, 1, 0);
-			else if (InputHandler.isKeyPressed(KeyEvent.VK_UP))
+			else if (InputHandler.isKeyPressed(KeyEvent.VK_UP)){
+				ydir = 1;
 				weapon.use(this, 0, -1);
+			}
 			else if (InputHandler.isKeyPressed(KeyEvent.VK_LEFT))
 				weapon.use(this, -1, 0);
-			else if (InputHandler.isKeyPressed(KeyEvent.VK_DOWN))
+			else if (InputHandler.isKeyPressed(KeyEvent.VK_DOWN)){
+				ydir = 0;
 				weapon.use(this, 0, 1);
+			}
 			tickLU = Main.getInstance().tick;
 		}
 	}
 
+	public void setDir(int xdir, int ydir){
+		if (Main.getInstance().tick - weapon.cooldown >= tickLU){
+			this.xdir = xdir;
+			this.ydir = ydir;
+		}
+	}
 	public void setT(int x, int y) {
 		sprite = sheet.getTexture(x, y);
 

@@ -20,7 +20,7 @@ public class AnimationController {
 	
 	public void update(SpriteSheet playerSprites, Player player){
 		if (playerState == State.WALK){
-			player.setT(playerSprites.getTexture(counter%4, 1));
+			player.setT(playerSprites.getTexture(counter%4, player.ydir));
 		}
 		if(Main.getInstance().tick - lastTick > 5){
 			counter++;
