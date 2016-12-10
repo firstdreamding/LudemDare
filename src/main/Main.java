@@ -33,7 +33,7 @@ public class Main {
 
 	private void init() {
 		level = new Level();
-		bg = new Texture("/res/bg.png", 960, 640);
+		bg = new Texture("/res/sprites/bg.png", 960, 640);
 		tick = 0;
 		fps = 1000 / 60;
 		timeLR = System.currentTimeMillis();
