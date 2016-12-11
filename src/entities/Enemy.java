@@ -6,6 +6,7 @@ import graphics.Texture;
 import main.Main;
 
 public class Enemy extends Entity {
+	final int vel = 1;
 	int dir;
 	Player player;
 	WaveHandler wh;
@@ -19,9 +20,8 @@ public class Enemy extends Entity {
 	public Enemy(int x, int y, int w, int h, int dir, int zombieNum, Player p, WaveHandler wh) {
 		super(x, y, w, h, dir, new Texture("/res/sprites/zombie" + zombieNum + ".png", w, h));
 		health = 50;
-		gvel = 1;
 		player = p;
-		zombieSprites = new SpriteSheet(new Texture("/res/sprites/zombie1.png", 240, 240), w, h);
+		zombieSprites = new SpriteSheet(new Texture("/res/sprites/zombie1.png",240, 240), w, h);
 		this.wh = wh;
 	}
 
@@ -39,56 +39,32 @@ public class Enemy extends Entity {
 	public void setHurtbox(Hurtbox hurtbox) {
 		this.hurtbox = hurtbox;
 	}
-
-	public void update() {
+	
+	public void update(){
 		pathFind();
-		y += yvel;
-		x += xvel;
 		animation();
 	}
 
 	public void pathFind() {
-		if (xvel != 1) {
-			if (xvel < 1 && xvel != 0)
-				xvel++;
-			else {
-				xvel--;
-			}
-		}
-		if (yvel != 1) {
-			if (yvel < 1 && yvel != 0)
-				yvel++;
-			else {
-				yvel--;
-			}
-		}
-		if (y == player.y) {
-			yvel = 0;
-			return;
-		}
-		if (x == player.x) {
-			xvel = 0;
-			return;
-		}
 		if (y > player.y) {
 			dir = 1;
-			yvel = -1 * gvel;
+			y -= vel;
 		} else if (y < player.y) {
 			dir = 0;
-			yvel = gvel;
+			y += vel;
 		}
 		if (x > player.x) {
 			dir = 3;
-			xvel = -1 * gvel;
+			x -= vel;
 		} else if (x < player.x) {
 			dir = 2;
-			xvel = gvel;
+			x += vel;
 		}
 	}
-
-	public void animation() {
-		this.setT(zombieSprites.getTexture(counter % 4, dir));
-		if (Main.getInstance().tick - lastTick > 5) {
+	
+	public void animation(){
+		this.setT(zombieSprites.getTexture(counter%4, dir));
+		if(Main.getInstance().tick - lastTick > 5){
 			counter++;
 			lastTick = Main.getInstance().tick;
 		}

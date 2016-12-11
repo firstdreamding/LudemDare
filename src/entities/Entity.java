@@ -5,7 +5,7 @@ import graphics.Texture;
 /** Any players, mobs, or simple entities with postion, speed and health */
 public class Entity {
 	public int marginX, marginY = 0;
-	public int x, y, xvel, yvel, gvel = 0;
+	public int x, y, xvel, yvel = 0;
 	public int dir = 1;
 	public Texture sprite;
 	public int w, h, health, radius;
@@ -185,14 +185,6 @@ public class Entity {
 
 	public void setT(Texture t) {
 		this.sprite = t;
-	}
-
-	public int getGvel() {
-		return gvel;
-	}
-
-	public void setGvel(int gvel) {
-		this.gvel = gvel;
 	}
 
 }

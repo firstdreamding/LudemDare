@@ -85,15 +85,9 @@ public class AttackController {
 
 	public void t2Hit(Hitbox hit, Hurtbox hurt) {
 		hurt.getEntity().subHealth(hit.dmg);
-		hurt.getEntity().setXvel(delta(hit.xvel) * hit.knock);
-		hurt.getEntity().setYvel(delta(hit.yvel) * hit.knock);
+		hurt.getEntity().setX(hurt.x + hit.xvel * hit.knock);
+		hurt.getEntity().setY(hurt.y + hit.yvel * hit.knock);
 		remove(hit);
-	}
-
-	private int delta(int i) {
-		if (i >= 0)
-			return 1;
-		return -1;
 	}
 
 	// Internal function ignore this
@@ -118,7 +112,7 @@ public class AttackController {
 	}
 
 	public void add(Projectile p, int i) {
-		add(p.hit.reset(p.xvel, p.yvel, p.knock), i);
+		add(p.hit.reset(p.xvel, p.yvel,p.knock), i);
 		projectiles.add(p);
 	}
 
