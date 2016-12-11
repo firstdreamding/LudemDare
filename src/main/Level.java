@@ -16,7 +16,7 @@ import graphics.Texture;
 
 public class Level {
 	public Player player;
-	Texture bg, coin, frame;
+	Texture bg, coin, frame, heart, hheart, nheart;
 	public AttackController ac;
 	public WaveHandler wh;
 	Font defFont;
@@ -24,12 +24,15 @@ public class Level {
 	int wave = 0;
 	double width;
 	SoundPlayer soundplayer;
-	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/guysheet.png", 240, 240), 60, 60);
+	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/guysheet.png", 240, 480), 60, 60);
 
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
 		coin = new Texture("/res/sprites/coin.png", 40, 40);
 		frame = new Texture("/res/sprites/frame.png", 100, 100);
+		heart = new Texture("/res/sprites/heart.png", 40, 40);
+		hheart = new Texture("/res/sprites/halfheart.png", 40, 40);
+		nheart = new Texture("/res/sprites/emptyheart.png", 40, 40);
 		player = new Player(0, 150, 200, 60, 60, 1, playerSprites.getTexture(0, 0));
 
 		ac = new AttackController();
@@ -75,18 +78,17 @@ public class Level {
 		screen.drawString(String.valueOf(player.gold), 60, 55, defFont, Color.RED);
 		screen.drawTexture(400, 0, frame);
 		screen.drawTexture(407, 15, player.weapon.texture);
-
-		screen.fillRect(650, 25, 200, 40, 0xff0000);
-		screen.drawRect(650, 25, 200, 40, 0x000000);
+		screen.fillRect(520, 25, 200, 40, 0xff0000);
+		screen.drawRect(520, 25, 200, 40, 0x000000);
 		if (!(player.weapon.isReloading)) {
-			screen.drawString(player.weapon.clip + "/" + player.weapon.clipSize, 725, 60);
+			screen.drawString(player.weapon.clip + "/" + player.weapon.clipSize, 595, 60);
 		} else {
-			width = (double) ((Main.getInstance().tick - player.weapon.startReload) * (200.0/player.weapon.reload));
-			if (width > 200){
+			width = (double) ((Main.getInstance().tick - player.weapon.startReload) * (200.0 / player.weapon.reload));
+			if (width > 200) {
 				width = 200;
 			}
-			screen.drawString("RELOADING", 675, 60);
-			screen.fillRect(650, 25, (int) width, 40, 0x0000ff);
+			screen.drawString("RELOADING", 545, 60);
+			screen.fillRect(520, 25, (int) width, 40, 0x0000ff);
 		}
 
 	}
