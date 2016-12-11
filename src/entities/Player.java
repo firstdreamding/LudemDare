@@ -34,9 +34,15 @@ public class Player extends Entity {
 	public int ydir;
 	boolean weaponLock;
 	public long tickLU;
+	public ArrayList<Texture> healthBar;
+
+	private Texture heart, hheart, nheart;
 
 	public Player(int pid, int x, int y, int w, int h, int dir, Texture sprite) {
 		super(x, y, w, h, dir, sprite);
+		heart = new Texture("/res/sprites/heart.png", 40, 40);
+		hheart = new Texture("/res/sprites/halfheart.png", 40, 40);
+		nheart = new Texture("/res/sprites/emptyheart.png", 40, 40);
 		playerID = 0;
 		inventory = new ArrayList<Integer>();
 		health = 100;
@@ -50,10 +56,33 @@ public class Player extends Entity {
 		weapon = (Weapon) Item.Pistol;
 		gold = 0;
 		tickLU = 0;
+		healthBar = new ArrayList<Texture>();
+		for (int i = 0; i < 5; i++) {
+			healthBar.add(heart);
+		}
 		// TODO Auto-generated constructor stub
 	}
 
 	public void init() {
+
+	}
+
+	public void updateHealth(int h) {
+		healthBar.clear();
+		health += h;
+		System.out.println(health);
+		int half = (health % 20) / 10;
+		int full = (int) Math.floor((health / 20));
+		int empty = 5 - (half + full);
+		for (int i = 0; i < full; i++) {
+			healthBar.add(heart);
+		}
+		for (int i = 0; i < half; i++) {
+			healthBar.add(hheart);
+		}
+		for (int i = 0; i < empty; i++) {
+			healthBar.add(nheart);
+		}
 
 	}
 
@@ -160,7 +189,7 @@ public class Player extends Entity {
 				Main.getInstance().state = Main.State.MENU;
 			}
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_K)) {
-			health -= 10;
+			updateHealth(-10);
 		}
 
 		if (Main.getInstance().tick - weapon.cooldown >= tickLU) {

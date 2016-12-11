@@ -16,7 +16,7 @@ import graphics.Texture;
 
 public class Level {
 	public Player player;
-	Texture bg, coin, frame, heart, hheart, nheart;
+	Texture bg, coin, frame;
 	public AttackController ac;
 	public WaveHandler wh;
 	Font defFont;
@@ -30,12 +30,10 @@ public class Level {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
 		coin = new Texture("/res/sprites/coin.png", 40, 40);
 		frame = new Texture("/res/sprites/frame.png", 100, 100);
-		heart = new Texture("/res/sprites/heart.png", 40, 40);
-		hheart = new Texture("/res/sprites/halfheart.png", 40, 40);
-		nheart = new Texture("/res/sprites/emptyheart.png", 40, 40);
+
 		player = new Player(0, 150, 200, 60, 60, 1, playerSprites.getTexture(0, 0));
 
-		ac = new AttackController();
+		ac = new AttackController(player);
 		wh = new WaveHandler(player, ac);
 
 		/*
@@ -45,7 +43,7 @@ public class Level {
 		width = 0;
 		defFont = new Font("Garamond", 1, 50);
 		ac.add(new Hurtbox(player), 0);
-		ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
+		// ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
 		animationController = new AnimationController();
 		animationController.playerState = AnimationController.State.NONE;
 		Entity placeHolder = new Entity(0, 0, 0, 0, 0, null);
@@ -73,6 +71,8 @@ public class Level {
 		render(screen);
 	}
 
+	private int healthBegin = 735;
+
 	public void gui(Screen screen) {
 		screen.drawTexture(10, 20, coin);
 		screen.drawString(String.valueOf(player.gold), 60, 55, defFont, Color.RED);
@@ -89,6 +89,9 @@ public class Level {
 			}
 			screen.drawString("RELOADING", 545, 60);
 			screen.fillRect(520, 25, (int) width, 40, 0x0000ff);
+		}
+		for (int i = 0; i < 5; i++) {
+			screen.drawTexture(healthBegin + (i * 45), 25, player.healthBar.get(i));
 		}
 
 	}

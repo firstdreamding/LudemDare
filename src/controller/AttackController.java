@@ -4,12 +4,13 @@ import java.util.ArrayList;
 
 import entities.Hitbox;
 import entities.Hurtbox;
+import entities.Player;
 import entities.Projectile;
 import graphics.Screen;
 
 public class AttackController {
 	ArrayList<Hitbox> team1Hit;
-	ArrayList<Hurtbox> team1Hurt;
+	Hurtbox team1Hurt;
 	ArrayList<Hurtbox> team2Hurt;
 	ArrayList<Hitbox> item;
 	ArrayList<Hitbox> removeH;
@@ -17,11 +18,12 @@ public class AttackController {
 	private ArrayList<Projectile> projectiles;
 	private ArrayList<Projectile> removeP;
 	private long id = 0;
+	Player player;
 
-	public AttackController() {
+	public AttackController(Player p) {
+		player = p;
 		// Hitboxes
 		team1Hit = new ArrayList<Hitbox>();
-		team1Hurt = new ArrayList<Hurtbox>();
 		team2Hurt = new ArrayList<Hurtbox>();
 		removeHurt = new ArrayList<Hurtbox>();
 		removeH = new ArrayList<Hitbox>();
@@ -41,13 +43,12 @@ public class AttackController {
 		}
 		// Hitboxes
 		doRemove();
-		for (Hurtbox t1hurt : team1Hurt) {
-			t1hurt.update();
-			for (Hurtbox t2hit : team2Hurt) {
-				t2hit.update();
-				if (t1hurt.intersects(t2hit)) {
-					t1Hit(t2hit, t1hurt);
-				}
+
+		team1Hurt.update();
+		for (Hurtbox t2hit : team2Hurt) {
+			t2hit.update();
+			if (team1Hurt.intersects(t2hit)) {
+				t1Hit(t2hit);
 			}
 		}
 		for (Hurtbox h1 : team2Hurt) {
@@ -76,8 +77,8 @@ public class AttackController {
 		}
 	}
 
-	public void t1Hit(Hurtbox hit, Hurtbox hurt) {
-		hurt.getEntity().subHealth(hit.damage);
+	public void t1Hit(Hurtbox hit) {
+		player.updateHealth(-1 * hit.damage);
 	}
 
 	public void t2Hit(Hitbox hit, Hurtbox hurt) {
@@ -101,7 +102,6 @@ public class AttackController {
 		}
 		int removeHur = removeHurt.size();
 		for (int i = 0; i < removeHur; i++) {
-			team1Hurt.remove(removeHurt.get(0));
 			team2Hurt.remove(removeHurt.get(0));
 			removeHurt.remove(0);
 		}
@@ -144,7 +144,7 @@ public class AttackController {
 	public void add(Hurtbox h, int i) {
 		switch (i) {
 		case 0:
-			team1Hurt.add(h);
+			team1Hurt = h;
 			break;
 		case 1:
 			h.id = id;
@@ -158,9 +158,8 @@ public class AttackController {
 		for (Hitbox h : team1Hit) {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0xFF0000);
 		}
-		for (Hurtbox h : team1Hurt) {
-			screen.drawRect(h.x, h.y, h.width, h.height, 0x0000FF);
-		}
+		screen.drawRect(team1Hurt.x, team1Hurt.y, team1Hurt.width, team1Hurt.height, 0x0000FF);
+
 		for (Hurtbox h : team2Hurt) {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0x0000FF);
 		}
