@@ -50,7 +50,7 @@ public class WaveHandler {
 		totalSpawn = f(wave);
 		for (int i = 0; i < totalSpawn; i++) {
 			int r = ran.randomInt(1, 4);
-			add((int) spawns.get(r).getX(), (int) spawns.get(r).getY(), 50, 50, 1, 1);
+			add((int) spawns.get(r).getX(), (int) spawns.get(r).getY(), 60, 60, 1, 1);
 		}
 	}
 
@@ -89,7 +89,7 @@ public class WaveHandler {
 
 		}
 		for (Enemy e : enemyList) {
-			e.pathFind();
+			e.update();
 		}
 
 	}

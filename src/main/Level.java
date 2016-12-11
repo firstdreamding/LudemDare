@@ -85,7 +85,6 @@ public class Level {
 			if (width > 200){
 				width = 200;
 			}
-			System.out.println(width);
 			screen.drawString("RELOADING", 675, 60);
 			screen.fillRect(650, 25, (int) width, 40, 0x0000ff);
 		}
