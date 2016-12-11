@@ -63,7 +63,7 @@ public class Player extends Entity {
 		invulnStop = 0;
 		playern = pid;
 		moveQueue = new MoveQueue();
-		weapon = (Weapon) Item.Pistol;
+		weapon = (Weapon) Item.Shotgun;
 		gold = 0;
 		tickLU = 0;
 		healthBar = new ArrayList<Texture>();
@@ -81,10 +81,10 @@ public class Player extends Entity {
 		if (flag) {
 			invuln = true;
 			invulnStop = System.currentTimeMillis() + 1000;
-			sheet=playerInvlunSprites;
+			sheet = playerInvlunSprites;
 		} else {
 			invuln = false;
-			sheet=playerSprites;
+			sheet = playerSprites;
 		}
 	}
 

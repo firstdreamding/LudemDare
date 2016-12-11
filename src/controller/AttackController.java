@@ -68,8 +68,7 @@ public class AttackController {
 					t1hit.update();
 					if (t1hit.expired()) {
 						removeH.add(t1hit);
-					}
-					else if (t2hurt.intersects(t1hit)) {
+					} else if (t2hurt.intersects(t1hit)) {
 						t2Hit(t1hit, t2hurt);
 					}
 				}
@@ -86,6 +85,8 @@ public class AttackController {
 
 	public void t2Hit(Hitbox hit, Hurtbox hurt) {
 		hurt.getEntity().subHealth(hit.dmg);
+		hurt.getEntity().setX(hurt.x + hit.xvel * hit.knock);
+		hurt.getEntity().setY(hurt.y + hit.yvel * hit.knock);
 		remove(hit);
 	}
 
@@ -111,7 +112,7 @@ public class AttackController {
 	}
 
 	public void add(Projectile p, int i) {
-		add(p.hit.reset(), i);
+		add(p.hit.reset(p.xvel, p.yvel), i);
 		projectiles.add(p);
 	}
 

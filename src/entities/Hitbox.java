@@ -14,6 +14,9 @@ public class Hitbox extends Rectangle {
 	public boolean projectile = false;;
 	public boolean cancellable = false;
 	public boolean dead = false;
+	public int xvel = 0;
+	public int yvel = 0;
+	public int knock = 1;
 
 	public void kill() {
 		dead = true;
@@ -50,7 +53,9 @@ public class Hitbox extends Rectangle {
 		projectile = Projectile;
 	}
 
-	public Hitbox reset() {
+	public Hitbox reset(int xspe, int yspe) {
+		xvel = xspe;
+		yvel = yspe;
 		timeStarted = System.currentTimeMillis();
 		return this;
 	}
