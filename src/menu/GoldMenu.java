@@ -31,6 +31,9 @@ public class GoldMenu extends Menu {
 			itemSelected--;
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_D) && itemSelected < 2)
 			itemSelected++;
+		if (InputHandler.isKeyTyped(KeyEvent.VK_ENTER)){
+			Main.getInstance().level.player.changeWeapon(itemSelected);
+		}
 	}
 
 	public void render(Screen screen) {

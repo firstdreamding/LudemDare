@@ -87,6 +87,10 @@ public class Player extends Entity {
 			sheet = playerSprites;
 		}
 	}
+	
+	public void changeWeapon(int id){
+		weapon = (Weapon) Item.getByID(id);
+	}
 
 	public void updateHealth(int h) {
 		healthBar.clear();
