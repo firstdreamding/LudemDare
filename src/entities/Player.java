@@ -87,8 +87,8 @@ public class Player extends Entity {
 			sheet = playerSprites;
 		}
 	}
-	
-	public void changeWeapon(int id){
+
+	public void changeWeapon(int id) {
 		weapon = (Weapon) Item.getByID(id);
 	}
 
@@ -213,7 +213,7 @@ public class Player extends Entity {
 				Main.getInstance().inMenu = true;
 				Main.getInstance().state = Main.State.MENU;
 			}
-		} else if (InputHandler.isKeyTyped(KeyEvent.VK_SPACE)) {
+		} else if (InputHandler.isKeyPressed(KeyEvent.VK_SPACE)) {
 			Main.getInstance().level.wh.startWave();
 		}
 

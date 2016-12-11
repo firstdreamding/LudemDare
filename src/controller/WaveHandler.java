@@ -29,8 +29,12 @@ public class WaveHandler {
 	private long spawnNext;
 	private long delay = 7000;
 
-	private int f(int x) {
-		return 2 * x;
+	private int f(int waves) {
+		int ret = 0;
+		for (int i = 1; i <= waves; i++) {
+			ret += (Math.floor(waves/5)+1);
+		}
+		return ret;
 	}
 
 	public WaveHandler(Player p, AttackController hbc, Level l) {
@@ -66,10 +70,9 @@ public class WaveHandler {
 			level.waveText = "Wave: " + wave;
 			zombiesLeft = f(wave);
 			zombiesToSpawn = f(wave);
-			System.out.println(zombiesToSpawn);
 			spawning = true;
 			inWave = true;
-			spawnNext=System.currentTimeMillis()+2000;
+			spawnNext = System.currentTimeMillis() + 2000;
 		}
 	}
 
