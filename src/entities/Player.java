@@ -104,9 +104,9 @@ public class Player extends Entity {
 		} else {
 			yvel = 0;
 		}
-		
-		if(weapon.isReloading){
-			if(Main.getInstance().tick-weapon.startReload > weapon.reload){
+
+		if (weapon.isReloading) {
+			if (Main.getInstance().tick - weapon.startReload > weapon.reload) {
 				weapon.reloadSound.play();
 				weapon.isReloading = false;
 			}
@@ -132,15 +132,6 @@ public class Player extends Entity {
 	}
 
 	private void handleInput() {
-		if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
-			dir = -1;
-			xvel = -3;
-			walk();
-		} else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
-			dir = 1;
-			xvel = 3;
-			walk();
-		}
 
 		if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
 			setDir(0, 1);
@@ -152,6 +143,17 @@ public class Player extends Entity {
 			dir = 0;
 			yvel = 3;
 			walk();
+		}
+		if (InputHandler.isKeyPressed(KeyEvent.VK_A)) {
+			setDir(0, 3);
+			dir = -1;
+			xvel = -3;
+			walk();
+		} else if (InputHandler.isKeyPressed(KeyEvent.VK_D)) {
+			setDir(0, 2);
+			dir = 1;
+			xvel = 3;
+			walk();
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_B)) {
 			if (!Main.getInstance().level.wh.inWave) {
 				Main.getInstance().inMenu = true;
@@ -161,7 +163,7 @@ public class Player extends Entity {
 
 		if (Main.getInstance().tick - weapon.cooldown >= tickLU) {
 			if (InputHandler.isKeyPressed(KeyEvent.VK_RIGHT)) {
-				ydir = 3;
+				ydir = 2;
 				weapon.use(this, 1, 0);
 				tickLU = Main.getInstance().tick;
 			} else if (InputHandler.isKeyPressed(KeyEvent.VK_UP)) {
@@ -169,7 +171,7 @@ public class Player extends Entity {
 				weapon.use(this, 0, -1);
 				tickLU = Main.getInstance().tick;
 			} else if (InputHandler.isKeyPressed(KeyEvent.VK_LEFT)) {
-				ydir = 2;
+				ydir = 3;
 				tickLU = Main.getInstance().tick;
 				weapon.use(this, -1, 0);
 			} else if (InputHandler.isKeyPressed(KeyEvent.VK_DOWN)) {
