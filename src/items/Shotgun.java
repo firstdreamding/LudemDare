@@ -12,7 +12,7 @@ public class Shotgun extends Weapon {
 		super(id, "Shotgun", "A good sturdy gun to solve all your problems!");
 		damage = 7;
 		cooldown = 45;
-		playerHoldingState = 2;
+		playerHoldingState = 1;
 	}
 
 	public void use(Entity entity, int xvel, int yvel) {
@@ -21,12 +21,12 @@ public class Shotgun extends Weapon {
 		for (int i = -2; i < 2; i++) {
 			if (yvel == 0) {
 				p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
-						10 * xvel, 10 * yvel + i, 10, 400, "coin", "Ak.wav");
+						20 * xvel, 20 * yvel + i, 10, 400, "bullet", "Ak.wav");
 				Main.getInstance().level.ac.add(p, 0);
 				p.playOff = true;
 			} else {
 				p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
-						10 * xvel + i, 10 * yvel, 10, 400, "coin", "Ak.wav");
+						20 * xvel + i, 20 * yvel, 10, 400, "bullet", "Ak.wav");
 				Main.getInstance().level.ac.add(p, 0);
 				p.playOff = true;
 			}

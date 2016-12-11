@@ -22,7 +22,7 @@ public class Ak47 extends Weapon {
 			if (!(entity instanceof Player))
 				return;
 			Projectile p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
-					10 * xvel, 10 * yvel, 10, 2000, "coin", "Ak.wav");
+					20 * xvel, 20 * yvel, 10, 2000, "bullet", "Ak.wav");
 			Main.getInstance().level.ac.add(p, 0);
 			clip--;
 			if (clip == 0) {

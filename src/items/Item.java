@@ -8,7 +8,8 @@ import graphics.Texture;
 
 public class Item {
 	int id;
-	String name, description;
+	public String name;
+	public String description;
 	public Texture texture;
 
 	public static Map<Integer, Item> items = new HashMap<Integer, Item>();
