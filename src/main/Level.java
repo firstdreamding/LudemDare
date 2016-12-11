@@ -24,7 +24,7 @@ public class Level {
 	int wave = 0;
 	double width;
 	SoundPlayer soundplayer;
-	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/player.png", 240, 120), 60, 60);
+	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/guysheet.png", 240, 240), 60, 60);
 
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);

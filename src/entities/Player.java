@@ -161,6 +161,7 @@ public class Player extends Entity {
 
 		if (Main.getInstance().tick - weapon.cooldown >= tickLU) {
 			if (InputHandler.isKeyPressed(KeyEvent.VK_RIGHT)) {
+				ydir = 3;
 				weapon.use(this, 1, 0);
 				tickLU = Main.getInstance().tick;
 			} else if (InputHandler.isKeyPressed(KeyEvent.VK_UP)) {
@@ -168,6 +169,7 @@ public class Player extends Entity {
 				weapon.use(this, 0, -1);
 				tickLU = Main.getInstance().tick;
 			} else if (InputHandler.isKeyPressed(KeyEvent.VK_LEFT)) {
+				ydir = 2;
 				tickLU = Main.getInstance().tick;
 				weapon.use(this, -1, 0);
 			} else if (InputHandler.isKeyPressed(KeyEvent.VK_DOWN)) {
