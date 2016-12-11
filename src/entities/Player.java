@@ -80,7 +80,7 @@ public class Player extends Entity {
 	public void setInvuln(boolean flag) {
 		if (flag) {
 			invuln = true;
-			invulnStop = System.currentTimeMillis() + 1000;
+			invulnStop = System.currentTimeMillis() + 1500;
 			sheet = playerInvlunSprites;
 		} else {
 			invuln = false;
