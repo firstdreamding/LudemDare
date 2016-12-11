@@ -47,7 +47,7 @@ public class Player extends Entity {
 		ydir = 0;
 		playern = pid;
 		moveQueue = new MoveQueue();
-		weapon = (Weapon) Item.Shotgun;
+		weapon = (Weapon) Item.Ak47;
 		gold = 0;
 		tickLU = 0;
 		// TODO Auto-generated constructor stub
