@@ -9,6 +9,7 @@ import entities.Hurtbox;
 import entities.Player;
 import graphics.Screen;
 import graphics.Texture;
+import utils.RandomGen;
 
 public class WaveHandler {
 
@@ -35,9 +36,7 @@ public class WaveHandler {
 		spawns.put(2, new Point(480, 640));
 		spawns.put(3, new Point(0, 370));
 		spawns.put(4, new Point(960, 370));
-		for (int i = 1; i < 5; i++) {
-			add((int) spawns.get(i).getX(), (int) spawns.get(i).getY(), 50, 50, 1, 1);
-		}
+
 		startWave();
 	}
 
@@ -46,8 +45,13 @@ public class WaveHandler {
 	}
 
 	private void startWave() {
+		RandomGen ran = new RandomGen();
 		wave++;
 		totalSpawn = f(wave);
+		for (int i = 0; i < totalSpawn; i++) {
+			int r = ran.randomInt(1, 4);
+			add((int) spawns.get(r).getX(), (int) spawns.get(r).getY(), 50, 50, 1, 1);
+		}
 	}
 
 	public void render(Screen screen) {
