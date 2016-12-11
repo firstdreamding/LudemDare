@@ -40,6 +40,20 @@ public class Entity {
 
 	}
 
+	public Entity(int x, int y, int w, int h, int dir) {
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+		this.dir = dir;
+		radius = (int) (w / 2);
+
+	}
+
+	public void setTexture(Texture t) {
+		sprite = t;
+	};
+
 	public void addHealth(int i) {
 		health += i;
 		if (health <= 0) {

@@ -39,9 +39,15 @@ public class Player extends Entity {
 	private Texture heart, hheart, nheart;
 	public boolean invuln;
 	long invulnStop;
+	public SpriteSheet playerSprites;
+	public SpriteSheet playerInvlunSprites;
 
-	public Player(int pid, int x, int y, int w, int h, int dir, Texture sprite) {
-		super(x, y, w, h, dir, sprite);
+	public Player(int pid, int x, int y, int w, int h, int dir) {
+		super(x, y, w, h, dir);
+		playerSprites = new SpriteSheet(new Texture("/res/sprites/guysheet.png", 240, 1680), w, h);
+		playerInvlunSprites = new SpriteSheet(new Texture("/res/sprites/guyinvlunsheet.png", 240, 1680), w, h);
+		sheet = playerSprites;
+		setT(1, 1);
 		heart = new Texture("/res/sprites/heart.png", 40, 40);
 		hheart = new Texture("/res/sprites/halfheart.png", 40, 40);
 		nheart = new Texture("/res/sprites/emptyheart.png", 40, 40);
@@ -75,8 +81,10 @@ public class Player extends Entity {
 		if (flag) {
 			invuln = true;
 			invulnStop = System.currentTimeMillis() + 1000;
+			sheet=playerInvlunSprites;
 		} else {
 			invuln = false;
+			sheet=playerSprites;
 		}
 	}
 

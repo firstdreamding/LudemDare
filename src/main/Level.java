@@ -24,14 +24,13 @@ public class Level {
 	int wave = 0;
 	double width;
 	SoundPlayer soundplayer;
-	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/guysheet.png", 240, 480), 60, 60);
 
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
 		coin = new Texture("/res/sprites/coin.png", 40, 40);
 		frame = new Texture("/res/sprites/frame.png", 100, 100);
 
-		player = new Player(0, 150, 200, 60, 60, 1, playerSprites.getTexture(0, 0));
+		player = new Player(0, 150, 200, 60, 60, 1);
 
 		ac = new AttackController(player);
 		wh = new WaveHandler(player, ac);
@@ -67,7 +66,7 @@ public class Level {
 		player.update();
 		ac.update();
 		wh.update();
-		animationController.update(playerSprites, player);
+		animationController.update(player.sheet, player);
 		render(screen);
 	}
 
