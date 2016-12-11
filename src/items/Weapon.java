@@ -6,6 +6,7 @@ import main.SoundPlayer;
 
 public class Weapon extends Item {
 	int damage;
+	int knock;
 	int cost;
 	int id;
 	public int playerHoldingState;

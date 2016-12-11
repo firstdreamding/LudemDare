@@ -112,7 +112,7 @@ public class AttackController {
 	}
 
 	public void add(Projectile p, int i) {
-		add(p.hit.reset(p.xvel, p.yvel), i);
+		add(p.hit.reset(p.xvel, p.yvel,p.knock), i);
 		projectiles.add(p);
 	}
 

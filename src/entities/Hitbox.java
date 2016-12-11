@@ -53,10 +53,11 @@ public class Hitbox extends Rectangle {
 		projectile = Projectile;
 	}
 
-	public Hitbox reset(int xspe, int yspe) {
+	public Hitbox reset(int xspe, int yspe, int knock) {
 		xvel = xspe;
 		yvel = yspe;
 		timeStarted = System.currentTimeMillis();
+		this.knock = knock;
 		return this;
 	}
 

@@ -12,6 +12,7 @@ public class Pistol extends Weapon {
 		damage = 3;
 		cooldown = 30;
 		clipSize = 8;
+		knock = 1;
 		reload = 60;
 		playerHoldingState = 1;
 		clip = clipSize;
@@ -25,7 +26,7 @@ public class Pistol extends Weapon {
 			if (!(entity instanceof Player))
 				return;
 			Projectile p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
-					20 * xvel, 20 * yvel, damage, 2000, "bullet", "Ak.wav");
+					20 * xvel, 20 * yvel, damage, 2000,knock, "bullet", "Ak.wav");
 			Main.getInstance().level.ac.add(p, 0);
 			clip--;
 			if (clip == 0) {
@@ -33,7 +34,7 @@ public class Pistol extends Weapon {
 				isReloading = true;
 				clip = clipSize;
 			}
-		} else if(Main.getInstance().tick-startReload > reload){
+		} else if (Main.getInstance().tick - startReload > reload) {
 			reloadSound.play();
 			isReloading = false;
 		}

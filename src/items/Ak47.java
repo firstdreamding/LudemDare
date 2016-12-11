@@ -12,6 +12,7 @@ public class Ak47 extends Weapon {
 		damage = 5;
 		cooldown = 15;
 		clipSize = 20;
+		knock = 4;
 		reload = 180;
 		reloadSound = new SoundPlayer("reload.wav");
 		reloadSound.setVolume(0.3);
@@ -25,7 +26,7 @@ public class Ak47 extends Weapon {
 			if (!(entity instanceof Player))
 				return;
 			Projectile p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
-					20 * xvel, 20 * yvel, damage, 2000, "bullet", "Ak.wav");
+					20 * xvel, 20 * yvel, damage, 2000,knock, "bullet", "Ak.wav");
 			Main.getInstance().level.ac.add(p, 0);
 			clip--;
 			if (clip == 0) {
