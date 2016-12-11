@@ -24,11 +24,10 @@ public class Level {
 	int wave = 0;
 	SoundPlayer soundplayer;
 	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/player.png", 240, 120), 60, 60);
-
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
 		coin = new Texture("/res/sprites/coin.png", 40, 40);
-		frame = new Texture("/res/sprites/frame.png", 80, 80);
+		frame = new Texture("/res/sprites/frame.png", 100,100);
 		player = new Player(0, 150, 200, 60, 60, 1, playerSprites.getTexture(0, 0));
 
 		ac = new AttackController();
@@ -71,9 +70,9 @@ public class Level {
 
 	public void gui(Screen screen) {
 		screen.drawTexture(10, 20, coin);
-		screen.drawTexture(400, 8, frame);
 		screen.drawString(String.valueOf(player.gold), 60, 55, defFont, Color.RED);
-		screen.drawTexture(406, 14, player.weapon.texture);
+		screen.drawTexture(400, 0, frame);
+		screen.drawTexture(407, 15, player.weapon.texture);
 
 	}
 

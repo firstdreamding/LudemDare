@@ -1,6 +1,8 @@
 package controller;
 
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import entities.Enemy;
 import entities.Hurtbox;
@@ -11,7 +13,7 @@ import graphics.Texture;
 public class WaveHandler {
 
 	public boolean inWave = true;
-
+	private HashMap<Integer, Point> spawns;
 	Texture zombie1;
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 	ArrayList<Enemy> remove = new ArrayList<Enemy>();
@@ -19,11 +21,21 @@ public class WaveHandler {
 	Player player;
 	AttackController ac;
 
+	private int f(int x) {
+		return 5 * x + 5;
+	}
+
 	public WaveHandler(Player p, AttackController hbc) {
 		player = p;
 		this.ac = hbc;
-		add(10, 10, 50, 50, 1, 1);
-
+		spawns = new HashMap<>();
+		spawns.put(1, new Point(480, 100));
+		spawns.put(2, new Point(480, 640));
+		spawns.put(3, new Point(0, 370));
+		spawns.put(4, new Point(960, 370));
+		for (int i = 1; i < 5; i++) {
+			add((int)spawns.get(i).getX(), (int)spawns.get(i).getY(), 50, 50, 1, 1);
+		}
 	}
 
 	public void render(Screen screen) {
