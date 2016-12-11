@@ -49,7 +49,7 @@ public class Level {
 		ac.add(placeHolderBox, 1);
 
 		soundplayer = new SoundPlayer("bg.wav");
-		soundplayer.setVolume(0.5);
+		soundplayer.setVolume(0.1);
 		soundplayer.play();
 	}
 

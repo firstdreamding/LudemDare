@@ -13,6 +13,7 @@ public class Item {
 
 	public static Item Ak47 = new Ak47(0);
 	public static Item Shotgun = new Shotgun(1);
+	public static Item Pistol = new Pistol(2);
 
 	public Item(int id, String name, String description) {
 		this.id = id;

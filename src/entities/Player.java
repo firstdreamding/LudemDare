@@ -47,7 +47,7 @@ public class Player extends Entity {
 		ydir = 0;
 		playern = pid;
 		moveQueue = new MoveQueue();
-		weapon = (Weapon) Item.Ak47;
+		weapon = (Weapon) Item.Pistol;
 		gold = 0;
 		tickLU = 0;
 		// TODO Auto-generated constructor stub
@@ -97,6 +97,13 @@ public class Player extends Entity {
 			}
 		} else {
 			yvel = 0;
+		}
+		
+		if(weapon.isReloading){
+			if(Main.getInstance().tick-weapon.startReload > weapon.reload){
+				weapon.reloadSound.play();
+				weapon.isReloading = false;
+			}
 		}
 
 		handleInput();
