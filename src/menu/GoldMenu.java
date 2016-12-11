@@ -33,7 +33,18 @@ public class GoldMenu extends Menu {
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_D) && itemSelected < 2)
 			itemSelected++;
 		if (InputHandler.isKeyTyped(KeyEvent.VK_ENTER)) {
-			Main.getInstance().level.player.changeWeapon(itemSelected);
+			if (Item.getByID(itemSelected).needBuyOnce && Item.getByID(itemSelected).haveBought){
+				Main.getInstance().level.player.changeWeapon(itemSelected);
+			}else if(Main.getInstance().level.player.gold >= Item.getByID(itemSelected).cost) {
+				Main.getInstance().level.player.changeWeapon(itemSelected);
+				Main.getInstance().level.player.addGold(Item.getByID(itemSelected).cost * -1);
+				Item.getByID(itemSelected).bought();
+			} else
+				System.out.println("Costs too much");
+			System.out.println(Main.getInstance().level.player.gold);
+			System.out.println(Item.getByID(itemSelected).cost);
+		} else if (InputHandler.isKeyTyped(KeyEvent.VK_0)) {
+			Main.getInstance().level.player.addGold(10);
 		}
 	}
 
@@ -53,8 +64,8 @@ public class GoldMenu extends Menu {
 				Item.getByID(itemSelected).texture);
 		screen.drawString(Item.getByID(itemSelected).name, Main.getInstance().WINDOWX / 2 + 200,
 				Main.getInstance().WINDOWY / 2 - 100, title, Color.BLACK);
-		screen.drawString(Item.getByID(itemSelected).description, 300,
-				Main.getInstance().WINDOWY / 2 + 200, description, Color.BLACK);
+		screen.drawString(Item.getByID(itemSelected).description, 300, Main.getInstance().WINDOWY / 2 + 200,
+				description, Color.BLACK);
 
 	}
 

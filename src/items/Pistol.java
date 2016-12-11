@@ -8,12 +8,13 @@ import main.SoundPlayer;
 
 public class Pistol extends Weapon {
 	public Pistol(int id) {
-		super(id, "Pistol", "A modern technology of goodness");
+		super(id, "Pistol", "A modern technology of goodness", 40);
 		damage = 3;
 		cooldown = 30;
 		clipSize = 8;
 		knock = 1;
 		reload = 60;
+		cost = 40;
 		playerHoldingState = 1;
 		clip = clipSize;
 		reloadSound = new SoundPlayer("reload.wav");

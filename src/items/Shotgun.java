@@ -11,12 +11,13 @@ public class Shotgun extends Weapon {
 	int spread;
 
 	public Shotgun(int id) {
-		super(id, "Shotgun", "Solves all your problems");
+		super(id, "Shotgun", "Solves all your problems", 100);
 		damage = 7;
 		knock = 6;
 		cooldown = 3;
 		playerHoldingState = 1;
 		spread = 3;
+		cost = 100;
 		clip = 1;
 		reload = 60;
 		clipSize = 1;

@@ -16,8 +16,9 @@ public class Weapon extends Item {
 	public SoundPlayer reloadSound;
 	public boolean isReloading;
 
-	public Weapon(int id, String name, String description) {
-		super(id, name, description);
+	public Weapon(int id, String name, String description, int cost) {
+		super(id, name, description, cost);
+		needBuyOnce = true;
 		damage = 10;
 		playerHoldingState = 0;
 		texture = new Texture("/res/sprites/items/" + name.toLowerCase() + ".png", 80, 80);

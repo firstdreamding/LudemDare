@@ -8,12 +8,13 @@ import main.SoundPlayer;
 
 public class Ak47 extends Weapon {
 	public Ak47(int id) {
-		super(id, "Ak47", "A modern technology of goodness");
+		super(id, "Ak47", "A modern technology of goodness", 200);
 		damage = 5;
 		cooldown = 15;
 		clipSize = 20;
 		knock = 4;
 		reload = 180;
+		cost = 200;
 		reloadSound = new SoundPlayer("reload.wav");
 		reloadSound.setVolume(0.3);
 		clip = clipSize;
