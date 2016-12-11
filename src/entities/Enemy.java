@@ -1,6 +1,5 @@
 package entities;
 
-import controller.AttackController;
 import controller.WaveHandler;
 import graphics.Texture;
 
@@ -26,6 +25,7 @@ public class Enemy extends Entity {
 			System.out.println("enemydead");
 			wh.remove(this);
 			player.addGold(gold);
+			wh.died();
 		}
 	}
 

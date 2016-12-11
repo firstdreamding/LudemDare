@@ -3,7 +3,6 @@ package items;
 import entities.Entity;
 import entities.Player;
 import entities.Projectile;
-import graphics.Texture;
 import main.Main;
 
 public class Ak47 extends Weapon {

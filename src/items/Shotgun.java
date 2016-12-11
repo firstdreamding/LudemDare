@@ -19,12 +19,12 @@ public class Shotgun extends Weapon {
 		if (!(entity instanceof Player))
 			return;
 		for (int i = -2; i < 2; i++) {
-			if (yvel == 0){
-			p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
-					10 * xvel, 10 * yvel +i , 10, 400, "coin", "Ak.wav");
-			Main.getInstance().level.ac.add(p, 0);
-			p.playOff = true;
-			} else{
+			if (yvel == 0) {
+				p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
+						10 * xvel, 10 * yvel + i, 10, 400, "coin", "Ak.wav");
+				Main.getInstance().level.ac.add(p, 0);
+				p.playOff = true;
+			} else {
 				p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
 						10 * xvel + i, 10 * yvel, 10, 400, "coin", "Ak.wav");
 				Main.getInstance().level.ac.add(p, 0);

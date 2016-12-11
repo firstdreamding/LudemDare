@@ -4,7 +4,7 @@ import entities.Entity;
 import graphics.Texture;
 import main.SoundPlayer;
 
-public class Weapon extends Item{
+public class Weapon extends Item {
 	int damage;
 	int cost;
 	int id;
@@ -15,13 +15,14 @@ public class Weapon extends Item{
 	public SoundPlayer reloadSound;
 	public boolean isReloading;
 
-	public Weapon(int id, String name, String description){
+	public Weapon(int id, String name, String description) {
 		super(id, name, description);
 		damage = 10;
 		playerHoldingState = 0;
-		texture = new Texture("/res/sprites/items/ak47.png", 80, 80);
+		texture = new Texture("/res/sprites/items/" + name.toLowerCase() + ".png", 80, 80);
 	}
-	public void use(Entity entity, int xvel, int yvel){
-		
+
+	public void use(Entity entity, int xvel, int yvel) {
+
 	}
 }

@@ -20,12 +20,14 @@ public class WaveHandler {
 	public int wave;
 	Player player;
 	AttackController ac;
+	private int totalSpawn;
 
 	private int f(int x) {
-		return 5 * x + 5;
+		return 4 * x;
 	}
 
 	public WaveHandler(Player p, AttackController hbc) {
+		wave = 0;
 		player = p;
 		this.ac = hbc;
 		spawns = new HashMap<>();
@@ -34,8 +36,18 @@ public class WaveHandler {
 		spawns.put(3, new Point(0, 370));
 		spawns.put(4, new Point(960, 370));
 		for (int i = 1; i < 5; i++) {
-			add((int)spawns.get(i).getX(), (int)spawns.get(i).getY(), 50, 50, 1, 1);
+			add((int) spawns.get(i).getX(), (int) spawns.get(i).getY(), 50, 50, 1, 1);
 		}
+		startWave();
+	}
+
+	public void died() {
+		totalSpawn--;
+	}
+
+	private void startWave() {
+		wave++;
+		totalSpawn = f(wave);
 	}
 
 	public void render(Screen screen) {
@@ -61,6 +73,11 @@ public class WaveHandler {
 	public void update() {
 		if (!inWave)
 			return;
+		System.out.println(totalSpawn);
+		if (totalSpawn < 1) {
+			System.out.println("done");
+			inWave = false;
+		}
 		int remLen = remove.size();
 		for (int i = 0; i < remLen; i++) {
 			enemyList.remove(remove.get(0));
