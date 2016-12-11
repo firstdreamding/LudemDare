@@ -20,14 +20,14 @@ public class AnimationController {
 	
 	public void update(SpriteSheet playerSprites, Player player){
 		if (playerState == State.WALK){
-			player.setT(playerSprites.getTexture(counter%4, player.ydir));
+			player.setT(playerSprites.getTexture(counter%4, player.weapon.playerHoldingState * 4 + player.ydir));
 		}
 		if(Main.getInstance().tick - lastTick > 5){
 			counter++;
 			lastTick =  Main.getInstance().tick;
 		}
 		if (playerState == State.NONE){
-			player.setT(playerSprites.getTexture(0, player.ydir));
+			player.setT(playerSprites.getTexture(1, player.weapon.playerHoldingState * 4 + player.ydir));
 		}
 	}
 	public static void setNone(Player player) {

@@ -8,7 +8,7 @@ public class Weapon extends Item {
 	int damage;
 	int cost;
 	int id;
-	int playerHoldingState;
+	public int playerHoldingState;
 	public int cooldown;
 	public int reload, clip, clipSize;
 	public long startReload;
