@@ -213,7 +213,7 @@ public class Player extends Entity {
 				Main.getInstance().inMenu = true;
 				Main.getInstance().state = Main.State.MENU;
 			}
-		} else if (InputHandler.isKeyTyped(KeyEvent.VK_K)) {
+		} else if (InputHandler.isKeyTyped(KeyEvent.VK_SPACE)) {
 			Main.getInstance().level.wh.startWave();
 		}
 

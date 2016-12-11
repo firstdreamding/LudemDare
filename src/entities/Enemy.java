@@ -41,6 +41,18 @@ public class Enemy extends Entity {
 
 	public void update() {
 		pathFind();
+		if (x < 55) {
+			x = 55;
+		}
+		if (y < 155) {
+			y = 155;
+		}
+		if (y > 640 - h) {
+			y = 640 - h;
+		}
+		if (x > 895 - w) {
+			x = 895 - w;
+		}
 		animation();
 	}
 

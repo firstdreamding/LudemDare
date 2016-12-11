@@ -14,7 +14,7 @@ import utils.RandomGen;
 
 public class WaveHandler {
 
-	public boolean inWave = true;
+	public boolean inWave = false;
 	private HashMap<Integer, Point> spawns;
 	Texture zombie1;
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
@@ -22,8 +22,12 @@ public class WaveHandler {
 	public int wave;
 	Player player;
 	AttackController ac;
-	private int totalSpawn;
+	private int zombiesLeft;
+	private int zombiesToSpawn;
+	private boolean spawning;
 	private Level level;
+	private long spawnNext;
+	private long delay = 7000;
 
 	private int f(int x) {
 		return 2 * x;
@@ -43,20 +47,59 @@ public class WaveHandler {
 	}
 
 	public void died() {
-		totalSpawn--;
+		zombiesLeft--;
 	}
 
-	public void startWave() {
-
+	private void spawn(int num) {
 		RandomGen ran = new RandomGen();
-		wave++;
-		level.waveText = "Wave: " + wave;
-		totalSpawn = f(wave);
-		for (int i = 0; i < totalSpawn; i++) {
+		for (int i = 0; i < num; i++) {
 			int r = ran.randomInt(0, 3);
 			add((int) spawns.get(r).getX(), (int) spawns.get(r).getY(), 60, 60, 1, 1);
 		}
-		inWave = true;
+
+	}
+
+	public void startWave() {
+		if (!inWave) {
+			wave++;
+			delay -= 100;
+			level.waveText = "Wave: " + wave;
+			zombiesLeft = f(wave);
+			zombiesToSpawn = f(wave);
+			System.out.println(zombiesToSpawn);
+			spawning = true;
+			inWave = true;
+			spawnNext=System.currentTimeMillis()+2000;
+		}
+	}
+
+	public void update() {
+		if (!inWave)
+			return;
+		if (System.currentTimeMillis() > spawnNext && spawning) {
+			if (zombiesToSpawn < 4) {
+				spawn(zombiesToSpawn);
+				spawning = false;
+			} else {
+				spawn(4);
+				zombiesToSpawn -= 4;
+			}
+			spawnNext = System.currentTimeMillis() + delay;
+		}
+		if (zombiesLeft < 1) {
+			level.waveText = "Wave Done";
+			inWave = false;
+		}
+		int remLen = remove.size();
+		for (int i = 0; i < remLen; i++) {
+			enemyList.remove(remove.get(0));
+			remove.remove(0);
+
+		}
+		for (Enemy e : enemyList) {
+			e.update();
+		}
+
 	}
 
 	public void render(Screen screen) {
@@ -79,23 +122,4 @@ public class WaveHandler {
 
 	}
 
-	public void update() {
-		if (!inWave)
-			return;
-		// System.out.println(totalSpawn);
-		if (totalSpawn < 1) {
-			level.waveText = "Wave Done";
-			inWave = false;
-		}
-		int remLen = remove.size();
-		for (int i = 0; i < remLen; i++) {
-			enemyList.remove(remove.get(0));
-			remove.remove(0);
-
-		}
-		for (Enemy e : enemyList) {
-			e.update();
-		}
-
-	}
 }
