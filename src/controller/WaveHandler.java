@@ -32,11 +32,11 @@ public class WaveHandler {
 		player = p;
 		this.ac = hbc;
 		spawns = new HashMap<>();
-		spawns.put(1, new Point(480, 100));
-		spawns.put(2, new Point(480, 640));
-		spawns.put(3, new Point(0, 370));
-		spawns.put(4, new Point(960, 370));
-
+		spawns.put(0, new Point(480, 100));
+		spawns.put(1, new Point(480, 640));
+		spawns.put(2, new Point(0, 370));
+		spawns.put(3, new Point(960, 370));
+		
 		startWave();
 	}
 
@@ -49,8 +49,8 @@ public class WaveHandler {
 		wave++;
 		totalSpawn = f(wave);
 		for (int i = 0; i < totalSpawn; i++) {
-			int r = ran.randomInt(1, 4);
-			add((int) spawns.get(r).getX(), (int) spawns.get(r).getY(), 60, 60, 1, 1);
+			int r = ran.randomInt(0, 3);
+			add((int) spawns.get(i).getX(), (int) spawns.get(i).getY(), 60, 60, 1, 1);
 		}
 	}
 
@@ -77,7 +77,7 @@ public class WaveHandler {
 	public void update() {
 		if (!inWave)
 			return;
-		System.out.println(totalSpawn);
+		//System.out.println(totalSpawn);
 		if (totalSpawn < 1) {
 			System.out.println("done");
 			inWave = false;

@@ -10,18 +10,17 @@ import graphics.Screen;
 public class AttackController {
 	ArrayList<Hitbox> team1Hit;
 	ArrayList<Hurtbox> team1Hurt;
-	ArrayList<Hitbox> team2Hit;
 	ArrayList<Hurtbox> team2Hurt;
 	ArrayList<Hitbox> item;
 	ArrayList<Hitbox> removeH;
 	ArrayList<Hurtbox> removeHurt;
 	private ArrayList<Projectile> projectiles;
 	private ArrayList<Projectile> removeP;
+	private long id = 0;
 
 	public AttackController() {
 		// Hitboxes
 		team1Hit = new ArrayList<Hitbox>();
-		team2Hit = new ArrayList<Hitbox>();
 		team1Hurt = new ArrayList<Hurtbox>();
 		team2Hurt = new ArrayList<Hurtbox>();
 		removeHurt = new ArrayList<Hurtbox>();
@@ -44,33 +43,36 @@ public class AttackController {
 		doRemove();
 		for (Hurtbox t1hurt : team1Hurt) {
 			t1hurt.update();
-			for (Hitbox t2hit : team2Hit) {
+			for (Hurtbox t2hit : team2Hurt) {
 				t2hit.update();
-				if (t2hit.expired()) {
-					removeH.add(t2hit);
-				}
 				if (t1hurt.intersects(t2hit)) {
 					t1Hit(t2hit, t1hurt);
 				}
 			}
 		}
-		for (Hurtbox t2hurt : team2Hurt) {
-			t2hurt.update();
-			for (Hitbox t1hit : team1Hit) {
-				t1hit.update();
-				if (t1hit.expired()) {
-					removeH.add(t1hit);
+		for (Hurtbox h1 : team2Hurt) {
+			for (Hurtbox h2 : team2Hurt) {
+				if (!h1.ids(h2.id)&&(h1.x == h2.x || h1.y == h2.y)) {
+					System.out.println("xd");
 				}
-				if (t2hurt.intersects(t1hit)) {
-					t2Hit(t1hit, t2hurt);
+			}
+			for (Hurtbox t2hurt : team2Hurt) {
+				t2hurt.update();
+				for (Hitbox t1hit : team1Hit) {
+					t1hit.update();
+					if (t1hit.expired()) {
+						removeH.add(t1hit);
+					}
+					if (t2hurt.intersects(t1hit)) {
+						t2Hit(t1hit, t2hurt);
+					}
 				}
 			}
 		}
 	}
 
-	public void t1Hit(Hitbox hit, Hurtbox hurt) {
-		hurt.getEntity().subHealth(hit.dmg);
-		remove(hit);
+	public void t1Hit(Hurtbox hit, Hurtbox hurt) {
+		hurt.getEntity().subHealth(hit.damage);
 	}
 
 	public void t2Hit(Hitbox hit, Hurtbox hurt) {
@@ -90,7 +92,6 @@ public class AttackController {
 		int removeHit = removeH.size();
 		for (int i = 0; i < removeHit; i++) {
 			team1Hit.remove(removeH.get(0));
-			team2Hit.remove(removeH.get(0));
 			removeH.remove(0);
 		}
 		int removeHur = removeHurt.size();
@@ -130,9 +131,6 @@ public class AttackController {
 		case 0:
 			team1Hit.add(h);
 			break;
-		case 1:
-			team2Hit.add(h);
-			break;
 		default:
 			item.add(h);
 		}
@@ -144,6 +142,8 @@ public class AttackController {
 			team1Hurt.add(h);
 			break;
 		case 1:
+			h.id = id;
+			id++;
 			team2Hurt.add(h);
 			break;
 		}
@@ -155,9 +155,6 @@ public class AttackController {
 		}
 		for (Hurtbox h : team1Hurt) {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0x0000FF);
-		}
-		for (Hitbox h : team2Hit) {
-			screen.drawRect(h.x, h.y, h.width, h.height, 0xFF0000);
 		}
 		for (Hurtbox h : team2Hurt) {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0x0000FF);

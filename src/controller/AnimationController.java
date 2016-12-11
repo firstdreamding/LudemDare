@@ -26,6 +26,9 @@ public class AnimationController {
 			counter++;
 			lastTick =  Main.getInstance().tick;
 		}
+		if (playerState == State.NONE){
+			player.setT(playerSprites.getTexture(0, player.ydir));
+		}
 	}
 	public static void setNone(Player player) {
 		playerState = State.NONE;		
