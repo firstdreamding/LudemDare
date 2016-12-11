@@ -22,12 +22,14 @@ public class Level {
 	Font defFont;
 	AnimationController animationController;
 	int wave = 0;
+	double width;
 	SoundPlayer soundplayer;
 	public SpriteSheet playerSprites = new SpriteSheet(new Texture("/res/sprites/player.png", 240, 120), 60, 60);
+
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
 		coin = new Texture("/res/sprites/coin.png", 40, 40);
-		frame = new Texture("/res/sprites/frame.png", 100,100);
+		frame = new Texture("/res/sprites/frame.png", 100, 100);
 		player = new Player(0, 150, 200, 60, 60, 1, playerSprites.getTexture(0, 0));
 
 		ac = new AttackController();
@@ -37,7 +39,7 @@ public class Level {
 		 * Projectile p = new Projectile(10, 70, 20, 20, 10, 0, 10, 2000,
 		 * "coin", "Ak.wav"); pc.add(p, 0);
 		 */
-
+		width = 0;
 		defFont = new Font("Garamond", 1, 50);
 		ac.add(new Hurtbox(player), 0);
 		ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
@@ -73,6 +75,20 @@ public class Level {
 		screen.drawString(String.valueOf(player.gold), 60, 55, defFont, Color.RED);
 		screen.drawTexture(400, 0, frame);
 		screen.drawTexture(407, 15, player.weapon.texture);
+
+		screen.fillRect(650, 25, 200, 40, 0xff0000);
+		screen.drawRect(650, 25, 200, 40, 0x000000);
+		if (!(player.weapon.isReloading)) {
+			screen.drawString(player.weapon.clip + "/" + player.weapon.clipSize, 725, 60);
+		} else {
+			width = (double) ((Main.getInstance().tick - player.weapon.startReload) * (200.0/player.weapon.reload));
+			if (width > 200){
+				width = 200;
+			}
+			System.out.println(width);
+			screen.drawString("RELOADING", 675, 60);
+			screen.fillRect(650, 25, (int) width, 40, 0x0000ff);
+		}
 
 	}
 
