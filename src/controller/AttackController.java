@@ -69,7 +69,7 @@ public class AttackController {
 					if (t1hit.expired()) {
 						removeH.add(t1hit);
 					}
-					if (t2hurt.intersects(t1hit)) {
+					else if (t2hurt.intersects(t1hit)) {
 						t2Hit(t1hit, t2hurt);
 					}
 				}
@@ -125,6 +125,7 @@ public class AttackController {
 
 	public void remove(Hitbox h) {
 		removeH.add(h);
+		h.kill();
 		if (h.projectile) {
 			for (Projectile p : projectiles) {
 				if (p.hit.equals(h)) {

@@ -13,6 +13,11 @@ public class Hitbox extends Rectangle {
 	public Entity e;
 	public boolean projectile = false;;
 	public boolean cancellable = false;
+	public boolean dead = false;
+
+	public void kill() {
+		dead = true;
+	}
 
 	/**
 	 * Hitbox entity
@@ -60,7 +65,9 @@ public class Hitbox extends Rectangle {
 	}
 
 	public boolean expired() {
-		return (System.currentTimeMillis()>(timeStarted+ duration));
+		if (dead)
+			return true;
+		return (System.currentTimeMillis() > (timeStarted + duration));
 	}
 
 	public void update() {

@@ -91,7 +91,6 @@ public class Player extends Entity {
 	public void updateHealth(int h) {
 		healthBar.clear();
 		health += h;
-		System.out.println(health);
 		int half = (health % 20) / 10;
 		int full = (int) Math.floor((health / 20));
 		int empty = 5 - (half + full);
