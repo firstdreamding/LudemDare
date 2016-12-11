@@ -9,6 +9,7 @@ import entities.Player;
 import graphics.Screen;
 import graphics.Texture;
 import graphics.Window;
+import items.Item;
 import menu.GoldMenu;
 import menu.Menu;
 

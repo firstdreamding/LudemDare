@@ -25,6 +25,10 @@ public class GoldMenu extends Menu {
 			Main.getInstance().inMenu = false;
 			Main.getInstance().state = Main.State.GAME;
 		}
+		
+		if (InputHandler.isKeyTyped(KeyEvent.VK_A)){ 
+			itemSelected--;
+		}
 	}
 
 	public void render(Screen screen) {
