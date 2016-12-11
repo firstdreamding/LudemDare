@@ -3,23 +3,25 @@ package items;
 import entities.Entity;
 import entities.Player;
 import entities.Projectile;
-import graphics.Texture;
 import main.Main;
+import main.SoundPlayer;
 
-public class Ak47 extends Weapon {
-	public Ak47(int id) {
-		super(id, "Ak47", "A modern technology of goodness");
-		damage = 5;
-		cooldown = 15;
-		clipSize = 20;
-		reload = 180;
+public class Pistol extends Weapon {
+	public Pistol(int id) {
+		super(id, "Pistol", "A modern technology of goodness");
+		damage = 3;
+		cooldown = 30;
+		clipSize = 8;
+		reload = 60;
+		playerHoldingState = 1;
 		clip = clipSize;
+		reloadSound = new SoundPlayer("reload.wav");
+		reloadSound.setVolume(0.5);
 		isReloading = false;
-		playerHoldingState = 2;
 	}
 
 	public void use(Entity entity, int xvel, int yvel) {
-		if (!isReloading || Main.getInstance().tick - startReload > reload) {
+		if (!isReloading) {
 			if (!(entity instanceof Player))
 				return;
 			Projectile p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
@@ -31,6 +33,9 @@ public class Ak47 extends Weapon {
 				isReloading = true;
 				clip = clipSize;
 			}
+		} else if(Main.getInstance().tick-startReload > reload){
+			reloadSound.play();
+			isReloading = false;
 		}
 	}
 }
