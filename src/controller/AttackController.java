@@ -52,8 +52,13 @@ public class AttackController {
 		}
 		for (Hurtbox h1 : team2Hurt) {
 			for (Hurtbox h2 : team2Hurt) {
-				if (!h1.ids(h2.id)&&(h1.x == h2.x || h1.y == h2.y)) {
-					System.out.println("xd");
+				if ((h1.x == h2.x && h1.y == h2.y)) {
+					if (!h1.ids(h2.id)) {
+						h1.getEntity().x += 15;
+						h2.getEntity().x -= 15;
+						h1.getEntity().y += 15;
+						h2.getEntity().y -= 15;
+					}
 				}
 			}
 			for (Hurtbox t2hurt : team2Hurt) {

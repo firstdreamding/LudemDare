@@ -15,6 +15,7 @@ public class Hurtbox extends Rectangle {
 
 	public boolean ids(long i) {
 		return id == i;
+	
 
 	}
 
