@@ -11,7 +11,7 @@ public class Shotgun extends Weapon {
 	int spread;
 
 	public Shotgun(int id) {
-		super(id, "Shotgun", "A good sturdy gun to solve all your problems!");
+		super(id, "Shotgun", "Solves all your problems");
 		damage = 7;
 		knock = 6;
 		cooldown = 3;
@@ -32,12 +32,12 @@ public class Shotgun extends Weapon {
 			for (int i = -2; i < 2; i++) {
 				if (yvel == 0) {
 					p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
-							20 * xvel, 20 * yvel + i * spread, damage, 400, knock, "bullet", "Ak.wav");
+							20 * xvel, 20 * yvel + i * spread, damage, 250, knock, "bullet", "Ak.wav");
 					Main.getInstance().level.ac.add(p, 0);
 					p.playOff = true;
 				} else {
 					p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
-							20 * xvel + i * spread, 20 * yvel, damage, 400, knock, "bullet", "Ak.wav");
+							20 * xvel + i * spread, 20 * yvel, damage, 250, knock, "bullet", "Ak.wav");
 					Main.getInstance().level.ac.add(p, 0);
 					p.playOff = true;
 				}

@@ -12,12 +12,13 @@ import main.Main;
 
 public class GoldMenu extends Menu {
 
-	Font defFont, arrowFont;
+	Font defFont, arrowFont, title, description;
 	int itemSelected;
 
 	public GoldMenu() {
-		defFont = new Font("Garamond", 1, 50);
+		title = new Font("Garamond", 1, 50);
 		defFont = new Font("Garamond", 1, 100);
+		description = new Font("Garamond", 1, 25);
 		itemSelected = 2;
 	}
 
@@ -26,12 +27,12 @@ public class GoldMenu extends Menu {
 			Main.getInstance().inMenu = false;
 			Main.getInstance().state = Main.State.GAME;
 		}
-		
-		if (InputHandler.isKeyTyped(KeyEvent.VK_A) && itemSelected > 0){ 
+
+		if (InputHandler.isKeyTyped(KeyEvent.VK_A) && itemSelected > 0) {
 			itemSelected--;
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_D) && itemSelected < 2)
 			itemSelected++;
-		if (InputHandler.isKeyTyped(KeyEvent.VK_ENTER)){
+		if (InputHandler.isKeyTyped(KeyEvent.VK_ENTER)) {
 			Main.getInstance().level.player.changeWeapon(itemSelected);
 		}
 	}
@@ -39,15 +40,21 @@ public class GoldMenu extends Menu {
 	public void render(Screen screen) {
 		screen.drawRect(Main.getInstance().WINDOWX / 2 - 100, Main.getInstance().WINDOWY / 2 - 100, 200, 200, 0x000000);
 		screen.drawString("Gold Shop", 100, 140, defFont, Color.YELLOW);
-		 if (itemSelected > 0)
-		 screen.drawString("<", Main.getInstance().WINDOWX/2 - 150, Main.getInstance().WINDOWY/2 + 40, arrowFont, Color.BLACK);
-		 if (itemSelected < 5)
-		 screen.drawString(">", Main.getInstance().WINDOWX/2 + 150, Main.getInstance().WINDOWY/2 + 40, arrowFont, Color.BLACK);
-		
+		if (itemSelected > 0)
+			screen.drawString("<", Main.getInstance().WINDOWX / 2 - 200, Main.getInstance().WINDOWY / 2 + 40, arrowFont,
+					Color.BLACK);
+		if (itemSelected < 2)
+			screen.drawString(">", Main.getInstance().WINDOWX / 2 + 150, Main.getInstance().WINDOWY / 2 + 40, arrowFont,
+					Color.BLACK);
+
 		Main.getInstance().level.gui(screen);
-		
-		screen.drawTexture(Main.getInstance().WINDOWX / 2 - 100, Main.getInstance().WINDOWY / 2 - 100, Item.getByID(itemSelected).texture);
-		screen.drawString(Item.getByID(itemSelected).name,Main.getInstance().WINDOWX / 2 + 200, Main.getInstance().WINDOWY / 2 - 100, defFont, Color.BLACK);
+
+		screen.drawTexture(Main.getInstance().WINDOWX / 2 - 100, Main.getInstance().WINDOWY / 2 - 100,
+				Item.getByID(itemSelected).texture);
+		screen.drawString(Item.getByID(itemSelected).name, Main.getInstance().WINDOWX / 2 + 200,
+				Main.getInstance().WINDOWY / 2 - 100, title, Color.BLACK);
+		screen.drawString(Item.getByID(itemSelected).description, 300,
+				Main.getInstance().WINDOWY / 2 + 200, description, Color.BLACK);
 
 	}
 
