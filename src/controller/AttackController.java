@@ -78,7 +78,10 @@ public class AttackController {
 	}
 
 	public void t1Hit(Hurtbox hit) {
-		player.updateHealth(-1 * hit.damage);
+		if (!player.invuln) {
+			player.updateHealth(-1 * hit.damage);
+			player.setInvuln(true);
+		}
 	}
 
 	public void t2Hit(Hitbox hit, Hurtbox hurt) {

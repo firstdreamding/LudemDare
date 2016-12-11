@@ -37,6 +37,8 @@ public class Player extends Entity {
 	public ArrayList<Texture> healthBar;
 
 	private Texture heart, hheart, nheart;
+	public boolean invuln;
+	long invulnStop;
 
 	public Player(int pid, int x, int y, int w, int h, int dir, Texture sprite) {
 		super(x, y, w, h, dir, sprite);
@@ -44,6 +46,7 @@ public class Player extends Entity {
 		hheart = new Texture("/res/sprites/halfheart.png", 40, 40);
 		nheart = new Texture("/res/sprites/emptyheart.png", 40, 40);
 		playerID = 0;
+		invuln = true;
 		inventory = new ArrayList<Integer>();
 		health = 100;
 		playerID = pid;
@@ -51,6 +54,7 @@ public class Player extends Entity {
 		special = 0;
 		xdir = 0;
 		ydir = 0;
+		invulnStop = 0;
 		playern = pid;
 		moveQueue = new MoveQueue();
 		weapon = (Weapon) Item.Pistol;
@@ -65,6 +69,15 @@ public class Player extends Entity {
 
 	public void init() {
 
+	}
+
+	public void setInvuln(boolean flag) {
+		if (flag) {
+			invuln = true;
+			invulnStop = System.currentTimeMillis() + 1000;
+		} else {
+			invuln = false;
+		}
 	}
 
 	public void updateHealth(int h) {
@@ -93,10 +106,12 @@ public class Player extends Entity {
 
 	public void update() {
 
-		if (frozen) {
-			if (System.currentTimeMillis() > freezeUntil) {
-				frozen = false;
-			}
+		/*
+		 * if (frozen) { if (System.currentTimeMillis() > freezeUntil) { frozen
+		 * = false; } }
+		 */
+		if (System.currentTimeMillis() > invulnStop) {
+			setInvuln(false);
 		}
 		if (x < 55) {
 			x = 55;
@@ -161,7 +176,6 @@ public class Player extends Entity {
 	}
 
 	private void handleInput() {
-
 		if (InputHandler.isKeyPressed(KeyEvent.VK_W)) {
 			setDir(0, 1);
 			dir = -2;
