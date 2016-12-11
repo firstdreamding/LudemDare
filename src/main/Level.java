@@ -20,10 +20,12 @@ public class Level {
 	public AttackController ac;
 	public WaveHandler wh;
 	Font defFont;
+	Font waveFont;
 	AnimationController animationController;
 	int wave = 0;
 	double width;
 	SoundPlayer soundplayer;
+	public String waveText = "";
 
 	public Level() {
 		bg = new Texture("/res/sprites/bg.png", 960, 540);
@@ -33,7 +35,7 @@ public class Level {
 		player = new Player(0, 150, 200, 60, 60, 1);
 
 		ac = new AttackController(player);
-		wh = new WaveHandler(player, ac);
+		wh = new WaveHandler(player, ac, this);
 
 		/*
 		 * Projectile p = new Projectile(10, 70, 20, 20, 10, 0, 10, 2000,
@@ -41,6 +43,7 @@ public class Level {
 		 */
 		width = 0;
 		defFont = new Font("Garamond", 1, 50);
+		waveFont = new Font("Garamond",1,40);
 		ac.add(new Hurtbox(player), 0);
 		// ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
 		animationController = new AnimationController();
@@ -51,7 +54,7 @@ public class Level {
 
 		soundplayer = new SoundPlayer("bg.wav");
 		soundplayer.setVolume(0.25);
-		soundplayer.play();
+		soundplayer.loop();
 	}
 
 	public void render(Screen screen) {
@@ -92,6 +95,7 @@ public class Level {
 		for (int i = 0; i < 5; i++) {
 			screen.drawTexture(healthBegin + (i * 45), 25, player.healthBar.get(i));
 		}
+		screen.drawString(waveText, 200, 55, waveFont, Color.red);
 
 	}
 

@@ -9,6 +9,7 @@ import entities.Hurtbox;
 import entities.Player;
 import graphics.Screen;
 import graphics.Texture;
+import main.Level;
 import utils.RandomGen;
 
 public class WaveHandler {
@@ -22,21 +23,22 @@ public class WaveHandler {
 	Player player;
 	AttackController ac;
 	private int totalSpawn;
+	private Level level;
 
 	private int f(int x) {
-		return 4 * x;
+		return 2 * x;
 	}
 
-	public WaveHandler(Player p, AttackController hbc) {
+	public WaveHandler(Player p, AttackController hbc, Level l) {
 		wave = 0;
 		player = p;
 		this.ac = hbc;
+		level = l;
 		spawns = new HashMap<>();
 		spawns.put(0, new Point(480, 100));
 		spawns.put(1, new Point(480, 640));
 		spawns.put(2, new Point(0, 370));
 		spawns.put(3, new Point(960, 370));
-		
 		startWave();
 	}
 
@@ -44,14 +46,17 @@ public class WaveHandler {
 		totalSpawn--;
 	}
 
-	private void startWave() {
+	public void startWave() {
+
 		RandomGen ran = new RandomGen();
 		wave++;
+		level.waveText = "Wave: " + wave;
 		totalSpawn = f(wave);
 		for (int i = 0; i < totalSpawn; i++) {
 			int r = ran.randomInt(0, 3);
 			add((int) spawns.get(r).getX(), (int) spawns.get(r).getY(), 60, 60, 1, 1);
 		}
+		inWave = true;
 	}
 
 	public void render(Screen screen) {
@@ -77,9 +82,9 @@ public class WaveHandler {
 	public void update() {
 		if (!inWave)
 			return;
-		//System.out.println(totalSpawn);
+		// System.out.println(totalSpawn);
 		if (totalSpawn < 1) {
-			System.out.println("done");
+			level.waveText = "Wave Done";
 			inWave = false;
 		}
 		int remLen = remove.size();

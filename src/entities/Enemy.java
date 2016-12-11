@@ -21,7 +21,7 @@ public class Enemy extends Entity {
 		super(x, y, w, h, dir, new Texture("/res/sprites/zombie" + zombieNum + ".png", w, h));
 		health = 50;
 		player = p;
-		zombieSprites = new SpriteSheet(new Texture("/res/sprites/zombie1.png",240, 240), w, h);
+		zombieSprites = new SpriteSheet(new Texture("/res/sprites/zombie1.png", 240, 240), w, h);
 		this.wh = wh;
 	}
 
@@ -29,7 +29,6 @@ public class Enemy extends Entity {
 	public void handleDeath() {
 		if (alive) {
 			alive = false;
-			System.out.println("enemydead");
 			wh.remove(this);
 			player.addGold(gold);
 			wh.died();
@@ -39,8 +38,8 @@ public class Enemy extends Entity {
 	public void setHurtbox(Hurtbox hurtbox) {
 		this.hurtbox = hurtbox;
 	}
-	
-	public void update(){
+
+	public void update() {
 		pathFind();
 		animation();
 	}
@@ -61,10 +60,10 @@ public class Enemy extends Entity {
 			x += vel;
 		}
 	}
-	
-	public void animation(){
-		this.setT(zombieSprites.getTexture(counter%4, dir));
-		if(Main.getInstance().tick - lastTick > 5){
+
+	public void animation() {
+		this.setT(zombieSprites.getTexture(counter % 4, dir));
+		if (Main.getInstance().tick - lastTick > 5) {
 			counter++;
 			lastTick = Main.getInstance().tick;
 		}

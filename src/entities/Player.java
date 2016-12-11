@@ -214,7 +214,7 @@ public class Player extends Entity {
 				Main.getInstance().state = Main.State.MENU;
 			}
 		} else if (InputHandler.isKeyTyped(KeyEvent.VK_K)) {
-			updateHealth(-10);
+			Main.getInstance().level.wh.startWave();
 		}
 
 		if (Main.getInstance().tick - weapon.cooldown >= tickLU) {
