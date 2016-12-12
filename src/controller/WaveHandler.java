@@ -32,7 +32,7 @@ public class WaveHandler {
 	private int f(int waves) {
 		int ret = 0;
 		for (int i = 1; i <= waves; i++) {
-			ret += (Math.floor(waves/5)+1);
+			ret += (Math.floor(i/5)+1);
 		}
 		return ret;
 	}
