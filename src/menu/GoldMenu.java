@@ -17,7 +17,7 @@ public class GoldMenu extends Menu {
 
 	public GoldMenu() {
 		title = new Font("Garamond", 1, 50);
-		defFont = new Font("Garamond", 1, 100);
+		defFont = new Font("Garamond", 1, 80);
 		description = new Font("Garamond", 1, 25);
 		itemSelected = 2;
 	}
@@ -50,7 +50,7 @@ public class GoldMenu extends Menu {
 
 	public void render(Screen screen) {
 		screen.drawRect(Main.getInstance().WINDOWX / 2 - 100, Main.getInstance().WINDOWY / 2 - 100, 200, 200, 0x000000);
-		screen.drawString("Gold Shop", 100, 140, defFont, Color.YELLOW);
+		screen.drawString("Gold Shop", 115, 170, defFont, Color.YELLOW);
 		if (itemSelected > 0)
 			screen.drawString("<", Main.getInstance().WINDOWX / 2 - 200, Main.getInstance().WINDOWY / 2 + 40, arrowFont,
 					Color.BLACK);
