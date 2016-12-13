@@ -15,6 +15,7 @@ import items.Weapon;
 import main.KeyMap;
 import main.Main;
 import main.MoveQueue;
+import menu.DeathMenu;
 
 public class Player extends Entity {
 
@@ -63,8 +64,8 @@ public class Player extends Entity {
 		invulnStop = 0;
 		playern = pid;
 		moveQueue = new MoveQueue();
-		weapon = (Weapon) Item.GoldenShotgun;
-		gold = 0;
+		weapon = (Weapon) Item.Smg;
+		gold = 500;
 		tickLU = 0;
 		healthBar = new ArrayList<Texture>();
 		for (int i = 0; i < 5; i++) {
@@ -166,7 +167,11 @@ public class Player extends Entity {
 				weapon.isReloading = false;
 			}
 		}
-
+		
+		if (health <= 0){
+			Main.getInstance().menu = new DeathMenu();
+			Main.getInstance().state = Main.State.MENU;
+		}
 		handleInput();
 	}
 

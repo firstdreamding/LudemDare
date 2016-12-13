@@ -16,12 +16,14 @@ public class Item {
 	public int maxId = 5;
 
 	public static Map<Integer, Item> items = new HashMap<Integer, Item>();
-	public static Item Ak47 = new Ak47(2, false);
-	public static Item Shotgun = new Shotgun(1, false);
+	public static Item Ak47 = new Ak47(3, false);
+	public static Item Shotgun = new Shotgun(2, false);
+	public static Item Smg = new Smg(1, false);
 	public static Item Pistol = new Pistol(0, false);
-	public static Item GoldenPistol = new Pistol(3,true);
-	public static Item GoldenShotgun = new Shotgun(4, true);
-	public static Item GoldenAk47 = new Ak47(5, true);
+	public static Item GoldenPistol = new Pistol(4,true);
+	public static Item GoldenSmg = new Smg(5, true);
+	public static Item GoldenShotgun = new Shotgun(6, true);
+	public static Item GoldenAk47 = new Ak47(7, true);
 
 	public Item(int id, String name, String description) {
 		this.id = id;

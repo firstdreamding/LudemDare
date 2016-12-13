@@ -9,7 +9,7 @@ import main.SoundPlayer;
 public class Ak47 extends Weapon {
 	public Ak47(int id, boolean isGolden) {
 		super(id, "Ak47", "A modern technology of goodness");
-		damage = 7;
+		damage = 10;
 		cooldown = 15;
 		clipSize = 20;
 		knock = 4;

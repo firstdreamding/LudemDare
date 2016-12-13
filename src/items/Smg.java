@@ -6,29 +6,28 @@ import entities.Projectile;
 import main.Main;
 import main.SoundPlayer;
 
-public class Pistol extends Weapon {
-	public Pistol(int id, boolean isGolden) {
-		super(id, "Pistol", "A modern technology of goodness");
+public class Smg extends Weapon {
+	public Smg(int id, boolean isGolden) {
+		super(id, "SMG", "Rapid fire? This the gun");
 		damage = 4;
-		cooldown = 30;
-		clipSize = 8;
+		cooldown = 10;
+		clipSize = 12;
 		knock = 1;
-		playerHoldingState = 1;
+		playerHoldingState = 3;
 		reload = 60;
-		haveBought = true;
-		cost = 0;
+		cost = 40;
 		clip = clipSize;
 		reloadSound = new SoundPlayer("reload.wav");
 		reloadSound.setVolume(0.5);
 		isReloading = false;
 		if(isGolden){
 			this.isGolden = true;
-			damage = 50;
-			haveBought = false;
-			cost = 175;
-			cooldown = 60;
-			playerHoldingState = 2;
-			
+			damage = 6;
+			cost = 250;
+			clipSize = 30;
+			cooldown = 10;
+			playerHoldingState = 4;
+			clip = clipSize;
 		}
 	}
 

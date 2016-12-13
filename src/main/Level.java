@@ -24,6 +24,7 @@ public class Level {
 	Font waveFontSmall;
 	AnimationController animationController;
 	int wave = 0;
+	boolean musicOn;
 	double width;
 	SoundPlayer soundplayer;
 	public String waveText = "";
@@ -45,6 +46,7 @@ public class Level {
 		width = 0;
 		defFont = new Font("Garamond", 1, 50);
 		waveFont = new Font("Garamond",1,40);
+		musicOn = false;
 		waveFontSmall = new Font("Garamond",1,15);
 		ac.add(new Hurtbox(player), 0);
 		// ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
@@ -56,7 +58,6 @@ public class Level {
 
 		soundplayer = new SoundPlayer("bg.wav");
 		soundplayer.setVolume(0.25);
-		soundplayer.loop();
 	}
 
 	public void render(Screen screen) {
@@ -68,6 +69,10 @@ public class Level {
 	}
 
 	public void update(Screen screen) {
+		if (!(musicOn)){
+			soundplayer.loop();
+			musicOn = true;
+		}
 		player.update();
 		ac.update();
 		wh.update();

@@ -43,8 +43,6 @@ public class GoldMenu extends Menu {
 				System.out.println("Costs too much");
 			System.out.println(Main.getInstance().level.player.gold);
 			System.out.println(Item.getByID(itemSelected).cost);
-		} else if (InputHandler.isKeyTyped(KeyEvent.VK_0)) {
-			Main.getInstance().level.player.addGold(10);
 		}
 	}
 

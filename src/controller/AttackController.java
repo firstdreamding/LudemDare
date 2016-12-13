@@ -160,6 +160,7 @@ public class AttackController {
 	}
 
 	public void render(Screen screen) {
+		/*
 		for (Hitbox h : team1Hit) {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0xFF0000);
 		}
@@ -168,8 +169,10 @@ public class AttackController {
 		for (Hurtbox h : team2Hurt) {
 			screen.drawRect(h.x, h.y, h.width, h.height, 0x0000FF);
 		}
+		*/
 		for (Projectile p : projectiles) {
 			screen.drawTexture(p.x, p.y, p.sprite);
 		}
+		
 	}
 }

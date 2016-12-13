@@ -9,9 +9,9 @@ import entities.Player;
 import graphics.Screen;
 import graphics.Texture;
 import graphics.Window;
-import items.Item;
 import menu.GoldMenu;
 import menu.Menu;
+import menu.StartMenu;
 
 public class Main {
 
@@ -20,20 +20,21 @@ public class Main {
 	}
 
 	public enum State {
-		MENU, GAME;
+		MENU, GAME, START;
 	};
 
-	public State state = State.GAME;
+	public State state = State.START;
 	public boolean inMenu = false;
 	ClassLoader cl = getClass().getClassLoader();
 	public Player player;
 	Texture bg;
 	public Level level;
 	AttackController hbc;
-	Menu menu = new GoldMenu();
+	public Menu menu = new GoldMenu();
 	public long tick;
 	long timeLR;
 	double fps;
+	public Menu start = new StartMenu();
 	public static Main instance;
 	public final int WINDOWX = 960;
 	public final int WINDOWY = 640;
@@ -80,6 +81,9 @@ public class Main {
 				} else if (state.equals(State.MENU)) {
 					menu.render(screen);
 					menu.update();
+				} else if (state.equals(State.START)) {
+					start.render(screen);
+					start.update();
 				}
 				window.update();
 				screen.clear(0xffffff);
