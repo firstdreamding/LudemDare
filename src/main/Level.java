@@ -26,7 +26,7 @@ public class Level {
 	int wave = 0;
 	boolean musicOn;
 	double width;
-	SoundPlayer soundplayer;
+	public SoundPlayer soundplayer;
 	public String waveText = "";
 
 	public Level() {

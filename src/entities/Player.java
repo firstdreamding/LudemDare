@@ -169,6 +169,7 @@ public class Player extends Entity {
 		}
 		
 		if (health <= 0){
+			Main.getInstance().level.soundplayer.stop();
 			Main.getInstance().menu = new DeathMenu();
 			Main.getInstance().state = Main.State.MENU;
 		}

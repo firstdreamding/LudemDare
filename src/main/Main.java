@@ -34,7 +34,7 @@ public class Main {
 	public long tick;
 	long timeLR;
 	double fps;
-	public Menu start = new StartMenu();
+	public Menu start;
 	public static Main instance;
 	public final int WINDOWX = 960;
 	public final int WINDOWY = 640;
@@ -43,12 +43,14 @@ public class Main {
 		return instance;
 	}
 
-	private void init() {
+	public void init() {
 		level = new Level();
 		bg = new Texture("/res/sprites/bg.png", WINDOWX, WINDOWY);
 		tick = 0;
 		fps = 1000 / 60;
 		timeLR = System.currentTimeMillis();
+		state = State.START;
+		start = new StartMenu(true);
 
 	}
 

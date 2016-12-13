@@ -16,7 +16,7 @@ public class CreditMenu extends Menu{
 	}
 	public void update(){
 		if (InputHandler.isKeyTyped(KeyEvent.VK_A)){
-			Main.getInstance().start = new StartMenu();
+			Main.getInstance().start = new StartMenu(false);
 		} 
 	}
 	
