@@ -7,19 +7,29 @@ import main.Main;
 import main.SoundPlayer;
 
 public class Ak47 extends Weapon {
-	public Ak47(int id) {
-		super(id, "Ak47", "A modern technology of goodness", 200);
-		damage = 5;
+	public Ak47(int id, boolean isGolden) {
+		super(id, "Ak47", "A modern technology of goodness");
+		damage = 7;
 		cooldown = 15;
 		clipSize = 20;
 		knock = 4;
 		reload = 180;
 		cost = 200;
+		playerHoldingState = 2;
+		if(isGolden){
+			this.isGolden = true;
+			damage = 6;
+			clipSize = 25;
+			reload = 160;
+			cooldown = 10;
+			cost = 600;
+			playerHoldingState = 6;
+
+		}
 		reloadSound = new SoundPlayer("reload.wav");
-		reloadSound.setVolume(0.3);
+		reloadSound.setVolume(0.5);
 		clip = clipSize;
 		isReloading = false;
-		playerHoldingState = 2;
 	}
 
 	public void use(Entity entity, int xvel, int yvel) {

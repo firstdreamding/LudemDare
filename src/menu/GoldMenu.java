@@ -19,7 +19,7 @@ public class GoldMenu extends Menu {
 		title = new Font("Garamond", 1, 50);
 		defFont = new Font("Garamond", 1, 80);
 		description = new Font("Garamond", 1, 25);
-		itemSelected = 2;
+		itemSelected = 0;
 	}
 
 	public void update() {
@@ -30,7 +30,7 @@ public class GoldMenu extends Menu {
 
 		if (InputHandler.isKeyTyped(KeyEvent.VK_A) && itemSelected > 0) {
 			itemSelected--;
-		} else if (InputHandler.isKeyTyped(KeyEvent.VK_D) && itemSelected < 2)
+		} else if (InputHandler.isKeyTyped(KeyEvent.VK_D) && itemSelected < Item.getByID(0).maxId)
 			itemSelected++;
 		if (InputHandler.isKeyTyped(KeyEvent.VK_ENTER)) {
 			if (Item.getByID(itemSelected).needBuyOnce && Item.getByID(itemSelected).haveBought){
@@ -54,19 +54,29 @@ public class GoldMenu extends Menu {
 		if (itemSelected > 0)
 			screen.drawString("<", Main.getInstance().WINDOWX / 2 - 200, Main.getInstance().WINDOWY / 2 + 40, arrowFont,
 					Color.BLACK);
-		if (itemSelected < 2)
+		if (itemSelected < Item.getByID(0).maxId)
 			screen.drawString(">", Main.getInstance().WINDOWX / 2 + 150, Main.getInstance().WINDOWY / 2 + 40, arrowFont,
 					Color.BLACK);
 
 		Main.getInstance().level.gui(screen);
 
-		screen.drawTexture(Main.getInstance().WINDOWX / 2 - 100, Main.getInstance().WINDOWY / 2 - 100,
-				Item.getByID(itemSelected).texture);
+		screen.drawTexture(Main.getInstance().WINDOWX / 2 - 95, Main.getInstance().WINDOWY / 2 - 95,
+				Item.getByID(itemSelected).shopIcon);
 		screen.drawString(Item.getByID(itemSelected).name, Main.getInstance().WINDOWX / 2 + 200,
 				Main.getInstance().WINDOWY / 2 - 100, title, Color.BLACK);
+		drawInfo(screen);
 		screen.drawString(Item.getByID(itemSelected).description, 300, Main.getInstance().WINDOWY / 2 + 200,
 				description, Color.BLACK);
 
+	}
+
+	private void drawInfo(Screen screen) {
+		screen.drawString("Cost: " + Item.getByID(itemSelected).cost, 85, 300, description, Color.BLACK);
+		screen.drawString("Damage: " + Item.getByID(itemSelected).damage, 85, 340, description, Color.BLACK);
+		screen.drawString("Reload: " + Item.getByID(itemSelected).reload, 85, 380, description, Color.BLACK);
+		screen.drawString("Cooldown: " + Item.getByID(itemSelected).cooldown, 85, 420, description, Color.BLACK);
+		
+		
 	}
 
 	public void reset() {

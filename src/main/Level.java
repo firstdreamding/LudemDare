@@ -21,6 +21,7 @@ public class Level {
 	public WaveHandler wh;
 	Font defFont;
 	Font waveFont;
+	Font waveFontSmall;
 	AnimationController animationController;
 	int wave = 0;
 	double width;
@@ -44,6 +45,7 @@ public class Level {
 		width = 0;
 		defFont = new Font("Garamond", 1, 50);
 		waveFont = new Font("Garamond",1,40);
+		waveFontSmall = new Font("Garamond",1,15);
 		ac.add(new Hurtbox(player), 0);
 		// ac.add(new Hitbox(10, 0, 0, 60, 60, 0, 0, 1000, player, false), 0);
 		animationController = new AnimationController();
@@ -95,7 +97,11 @@ public class Level {
 		for (int i = 0; i < 5; i++) {
 			screen.drawTexture(healthBegin + (i * 45), 25, player.healthBar.get(i));
 		}
-		screen.drawString(waveText, 200, 55, waveFont, Color.red);
+		screen.drawString(waveText, 165, 55, waveFont, Color.red);
+		if (waveText.equals("Wave Done")){
+			screen.drawString("Space for next wave", 165, 85, waveFontSmall, Color.red);
+			screen.drawString("B to go to shop", 530, 90, waveFontSmall, Color.red);
+		}
 
 	}
 

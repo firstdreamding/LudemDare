@@ -9,20 +9,29 @@ import main.SoundPlayer;
 public class Shotgun extends Weapon {
 	Projectile p;
 	int spread;
+	int spreadBullets;
 
-	public Shotgun(int id) {
-		super(id, "Shotgun", "Solves all your problems", 100);
+	public Shotgun(int id, boolean isGolden) {
+		super(id, "Shotgun", "1 bullet? Why not 4?");
 		damage = 7;
 		knock = 6;
-		cooldown = 3;
+		cooldown = 0;
 		playerHoldingState = 1;
 		spread = 3;
+		spreadBullets = 4;
 		cost = 100;
 		clip = 1;
 		reload = 60;
 		clipSize = 1;
 		reloadSound = new SoundPlayer("reload.wav");
-		reloadSound.setVolume(0.3);
+		reloadSound.setVolume(0.5);
+		if(isGolden){
+			this.isGolden = true;
+			cost = 250;
+			playerHoldingState = 6;
+			spreadBullets = 6;
+
+		}
 
 	}
 
@@ -30,7 +39,7 @@ public class Shotgun extends Weapon {
 		if (!isReloading) {
 			if (!(entity instanceof Player))
 				return;
-			for (int i = -2; i < 2; i++) {
+			for (int i = spreadBullets/2 * -1; i < spreadBullets/2; i++) {
 				if (yvel == 0) {
 					p = new Projectile(Main.getInstance().level.player.x, Main.getInstance().level.player.y, 20, 20,
 							20 * xvel, 20 * yvel + i * spread, damage, 250, knock, "bullet", "Ak.wav");

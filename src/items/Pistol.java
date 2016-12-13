@@ -7,19 +7,27 @@ import main.Main;
 import main.SoundPlayer;
 
 public class Pistol extends Weapon {
-	public Pistol(int id) {
-		super(id, "Pistol", "A modern technology of goodness", 40);
-		damage = 3;
+	public Pistol(int id, boolean isGolden) {
+		super(id, "Pistol", "A modern technology of goodness");
+		damage = 4;
 		cooldown = 30;
 		clipSize = 8;
 		knock = 1;
+		playerHoldingState = 1;
 		reload = 60;
 		cost = 40;
-		playerHoldingState = 1;
 		clip = clipSize;
 		reloadSound = new SoundPlayer("reload.wav");
-		reloadSound.setVolume(0.3);
+		reloadSound.setVolume(0.5);
 		isReloading = false;
+		if(isGolden){
+			this.isGolden = true;
+			damage = 50;
+			cost = 175;
+			cooldown = 60;
+			playerHoldingState = 2;
+			
+		}
 	}
 
 	public void use(Entity entity, int xvel, int yvel) {

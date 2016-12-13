@@ -28,7 +28,7 @@ public class Projectile extends Entity {
 		hit = new Hitbox(damage, 0, 0, w, h, 0, 0, dur, this, true);
 		if (!playOff) {
 			soundplayer = new SoundPlayer(path);
-			soundplayer.setVolume(0.02);
+			soundplayer.setVolume(0.075);
 			soundplayer.play();
 		}
 		start = System.currentTimeMillis();

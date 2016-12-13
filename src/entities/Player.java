@@ -63,7 +63,7 @@ public class Player extends Entity {
 		invulnStop = 0;
 		playern = pid;
 		moveQueue = new MoveQueue();
-		weapon = (Weapon) Item.Shotgun;
+		weapon = (Weapon) Item.GoldenShotgun;
 		gold = 0;
 		tickLU = 0;
 		healthBar = new ArrayList<Texture>();
